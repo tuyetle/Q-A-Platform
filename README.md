@@ -5,11 +5,13 @@
 
 Your web application's functionality should include (but not be limited to) the following features:
 
-Application core features
-Internationalization/Localization (i18n and l10n)
-User data input and data validation
-Proper use of controller and services
-Backend interaction (not to be mistaken with server-side processing)
+<ul>
+	<li>Application core features</li>
+	<li>Internationalization/Localization (i18n and l10n)</li>
+	<li>User data input and data validation</li>
+	<li>Proper use of controller and services</li>
+	<li>Backend interaction (not to be mistaken with server-side processing)</li>
+</ul>
 
 <h2>GRADING SCHEME</h2>
 
@@ -43,6 +45,7 @@ Score factors and weighting points:
 
 <ul>
 	<li>Developing UI clean and friendly with user (based on Bootstrap)</li>
+	<li>Data (discusing)</li>
 	<li>Login/Authentication (simple)</li>
 	<li>List all questions on index view (paging)</li>
 	<li>Show details of 1 question and its answers, and related questions</li>
