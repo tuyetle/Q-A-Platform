@@ -13,16 +13,12 @@ Your web application's functionality should include (but not be limited to) the 
 	<li>Backend interaction (not to be mistaken with server-side processing)</li>
 </ul>
 
-<h2>GRADING SCHEME</h2>
+<h2>DEADLINE</h2>
 
-The maximum project score is formulated as follows:
-max project score = 100 points x number of group members
- 
-The more members in your group, the higher maximum project score. However, you may not get the maximum project score AND the project actual score is distributed over the number of group members:
-individual score = actual project score / number of group members
-The maximum individual score is 100 points.
- 
-Score factors and weighting points: 
+Monday, May 02 of 2014
+
+<h2>Score factors and weighting points: </h2>
+
 20% for UX - User Experience: UI must looks nice, clean and easy to use
 50% for functionality: Your app does what you say it WILL do. And your app does not do what you say it WILL NOT do. :|
 10% for clean, consistent coding style
@@ -30,7 +26,7 @@ Score factors and weighting points:
  
  
  Penalty for late submission:
-5 points is deducted from your individual score for each day after the deadline (Monday, May 02 of 2014)
+5 points is deducted from your individual score for each day after the deadline
 
 <h2>MEMBERS</h2>
 
