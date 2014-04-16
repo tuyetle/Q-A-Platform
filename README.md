@@ -19,14 +19,15 @@ Monday, May 02 of 2014
 
 <h2>Score factors and weighting points: </h2>
 
-20% for UX - User Experience: UI must looks nice, clean and easy to use
-50% for functionality: Your app does what you say it WILL do. And your app does not do what you say it WILL NOT do. :|
-10% for clean, consistent coding style
-20% for high performance
+<ul>
+	<li>20% for UX - User Experience: UI must looks nice, clean and easy to use</li>
+	<li>50% for functionality: Your app does what you say it WILL do. And your app does not do what you say it WILL NOT do. :|</li>
+	<li>10% for clean, consistent coding style</li>
+	<li>20% for high performance</li>
+</ul>
  
- 
- Penalty for late submission:
-5 points is deducted from your individual score for each day after the deadline
+<p> Penalty for late submission:
+	5 points is deducted from your individual score for each day after the deadline</p>
 
 <h2>MEMBERS</h2>
 
