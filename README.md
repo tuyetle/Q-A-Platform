@@ -42,11 +42,11 @@ Monday, May 02 of 2014
 
 <ul>
 	<li>Developing UI clean and friendly with user (based on Bootstrap)</li>
-	<li>Data (discusing)</li>
+	<li>Data (discussing)</li>
 	<li>Login/Authentication (simple)</li>
 	<li>List all questions on index view (paging)</li>
 	<li>Show details of 1 question and its answers, and related questions</li>
 	<li>Interact with question when show details (like, share on social network (optional)...)</li>
-	<li>Group all question to category (1 question may belongs to many category). Show all category</li>
-	<li>Search questions, advandced search (optional)</li>
+	<li>Group all question to categories (1 question may belongs to many category). Show all categories</li>
+	<li>Search questions, advanced search (optional)</li>
 </ul>
