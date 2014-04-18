@@ -36,6 +36,7 @@ Monday, May 02 of 2014
 	<li>Tuyet Le</li>
 	<li>Long Nguyen</li>
 	<li>Tuyen Cao</li>
+	<li>Thao Duong</li>
 </ul>
 
 <h2>DETAILS REQUIREMENTS</h2>
