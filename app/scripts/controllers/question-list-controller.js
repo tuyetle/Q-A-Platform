@@ -11,6 +11,7 @@ QuestionsList.controller('QuestionsListController', function($scope, Questions, 
 });
 
 
-QuestionsList.controller('AskQuestionController', function($scope, Questions) {
+QuestionsList.controller('AskQuestionController', function($scope, Questions, Categories) {
+	$scope.categoryList = Categories.query();
 	console.log('AskQuestionController is running');
 });
