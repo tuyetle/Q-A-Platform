@@ -4,7 +4,7 @@
   "description": "This is a training project for AngularJs Course",
   "main": "server.js",
   "dependencies": {
-    "express": "~4.0.0",  
+    "express": "~4.0.0"
   },
   "devDependencies": {
     "karma": "^0.12.9"
