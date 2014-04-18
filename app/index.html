@@ -16,7 +16,7 @@
 </head>
 <body>
 	
-	<div class="container">
+	<div class="container" ng-controller="CategoriesListController">
 		<div class="row">
 			<div class="col-xs-2">
 				<img src="images/logo.jpg" width="150" alt="Q&A" class="img-rounded">
@@ -48,25 +48,9 @@
 		<div class="row">
 			<div class="col-xs-2">
 				<ul class="list-group">
-				  <li class="list-group-item">
-				    <span class="badge">14</span>
-				   	<a href="#">Cras justo odio</a>
-				  </li>
-				  <li class="list-group-item">
-				    <span class="badge">14</span>
-				   	<a href="#">Cras justo odio</a>
-				  </li>
-				  <li class="list-group-item">
-				    <span class="badge">14</span>
-				   	<a href="#">Cras justo odio</a>
-				  </li>
-				  <li class="list-group-item">
-				    <span class="badge">14</span>
-				   	<a href="#">Cras justo odio</a>
-				  </li>
-				  <li class="list-group-item">
-				    <span class="badge">14</span>
-				   	<a href="#">Cras justo odio</a>
+				  <li ng-repeat="categoty in categoryList" ng-class="{active:categoty.id==selectedCategory" class="list-group-item"> 
+				    <span class="badge">{{categoty.number}}</span>
+				   	<a ng-click="selectCategory(categoty.id)" href="#/category/{{categoty.id}}">{{categoty.name}}</a>
 				  </li>
 				</ul>
 				<div class="panel panel-default">
