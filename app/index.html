@@ -1,16 +1,17 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="QAP">
 <head>
 	<meta charset="UTF-8">
 	<title>Q&A Platform</title>
 	<link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
+	 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 	<script type="text/javascript" src="scripts/vendors/bootstrap.min.js"></script>
 	<script type="text/javascript" src="scripts/vendors/underscore-min.js"></script>
 	<script type="text/javascript" src="scripts/directives.js"></script>
 	<script type="text/javascript" src="scripts/filters.js"></script>
 	<script type="text/javascript" src="scripts/services.js"></script>
-	<script type="text/javascript" src="scripts/controllers/main-controller.js"></script>
+	<script type="text/javascript" src="scripts/controllers/question-list-controller.js"></script>
 	<script type="text/javascript" src="scripts/app.js"></script>
 </head>
 <body>
@@ -27,8 +28,6 @@
 					<a href="#" class="btn btn-info pull-right">Sign in</a>
 				</div>
 				</div>
-				
-				
 			</div>
 		</div>
 		
@@ -81,53 +80,8 @@
 				  </div>
 				</div>
 			</div>
-			<div class="col-xs-7">
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-					    <h3 class="panel-title"><a href="#">Recent</a><a href="#">Popular</a></h3>
-					 </div>
-					<div class="panel-body">
-						
-					</div>
-					<ul class="list-group">
-				  <li class="list-group-item">
-				    
-				   	<blockquote><a href="">Cras justo odio</a></blockquote>
-				   	<span class="glyphicon glyphicon-user"> ABC</span>
-				   	<span class="glyphicon glyphicon-calendar pull-right"> 20-04-2014</span><br />
-				   	<span class="label label-success">12 answers</span>
-				  </li>
-				  <li class="list-group-item">
-				    
-				   	<blockquote><a href="">Cras justo odio</a></blockquote>
-				   	<span class="glyphicon glyphicon-user"> ABC</span>
-				   	<span class="glyphicon glyphicon-calendar pull-right"> 20-04-2014</span><br />
-				   	<span class="label label-success">12 answers</span>
-				  </li>
-				  <li class="list-group-item">
-				    
-				   	<blockquote><a href="">Cras justo odio</a></blockquote>
-				   	<span class="glyphicon glyphicon-user"> ABC</span>
-				   	<span class="glyphicon glyphicon-calendar pull-right"> 20-04-2014</span><br />
-				   	<span class="label label-success">12 answers</span>
-				  </li>
-				  <li class="list-group-item">
-				    
-				   	<blockquote><a href="">Cras justo odio</a></blockquote>
-				   	<span class="glyphicon glyphicon-user"> ABC</span>
-				   	<span class="glyphicon glyphicon-calendar pull-right"> 20-04-2014</span><br />
-				   	<span class="label label-success">12 answers</span>
-				  </li>
-				  <li class="list-group-item">
-				    
-				   	<blockquote><a href="">Cras justo odio</a></blockquote>
-				   	<span class="glyphicon glyphicon-user"> ABC</span>
-				   	<span class="glyphicon glyphicon-calendar pull-right"> 20-04-2014</span><br />
-				   	<span class="label label-success">12 answers</span>
-				  </li>
-				</ul>
-				  <div class="panel-footer">Panel footer</div>
-				</div>
+			<div class="col-xs-7" ng-view>
+				
 			</div>
 			<div class="col-xs-3">
 				<div class="panel panel-danger">
