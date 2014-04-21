@@ -57,6 +57,10 @@ ServicesModule.factory('Questions',function() {
 	var Questions = {
 		query: function() {
 			return data;
+		},
+		askQuestion: function(question) {
+			_.extend(question, {id: data.length + 1, answers: 0});
+			return data.push(question); //return the length of data
 		}
 	}
 	return Questions;
