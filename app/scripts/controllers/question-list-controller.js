@@ -12,6 +12,23 @@ QuestionsList.controller('QuestionsListController', function($scope, Questions, 
 
 
 QuestionsList.controller('AskQuestionController', function($scope, Questions, Categories) {
+	$scope.newQuestion = {};
+	$scope.selectedCategories = [];
 	$scope.categoryList = Categories.query();
-	console.log('AskQuestionController is running');
+
+
+	$scope.selectCategory = function(item) {
+		var idx = $scope.selectedCategories.indexOf(item);
+		 if (idx > -1) {
+	      $scope.selectedCategories.splice(idx, 1);
+	  	}
+	    else {
+	      $scope.selectedCategories.push(item);
+	    }
+	}
+	$scope.askQuestion = function() {
+		$scope.newQuestion.categories = $scope.selectedCategories;
+		$scope.newQuestion.date = "21-04-2014";
+		Questions.askQuestion($scope.newQuestion);
+	}
 });
