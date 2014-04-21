@@ -8,6 +8,9 @@
 	<ul class="list-group">
 		<li ng-repeat="question in questions" class="list-group-item">						
 			<blockquote><a href="">{{question.title}}</a></blockquote>
+			<div ng-if="question.description.length > 0">
+		        {{question.description}}
+		    </div>
 			<span class="glyphicon glyphicon-user"> {{question.user}}</span>
 			<span class="glyphicon glyphicon-calendar pull-right"> {{question.date}}</span><br />
 			<span class="label label-success"> {{question.anwsers}} anwsers</span>
