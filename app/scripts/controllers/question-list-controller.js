@@ -31,6 +31,14 @@ QuestionControllers.controller('AskQuestionController', function($scope, Questio
 		$scope.newQuestion.date = "21-04-2014";
 		Questions.askQuestion($scope.newQuestion);
 	}
+
+	$scope.getCategoryNames = function(ids) {
+		var arr = [];
+		for (var i = 0; i < ids.length; i ++) {
+			arr.push(Categories.getCategoryNameByID(id));
+		}
+		return arr;
+	}
 });
 
 QuestionControllers.controller('QuestionDetailsController', function($scope, $routeParams) {
