@@ -7,7 +7,7 @@
 	</div>
 	<ul class="list-group">
 		<li ng-repeat="question in questions" class="list-group-item">						
-			<blockquote><a href="">{{question.title}}</a></blockquote>
+			<blockquote><a href="#/q-details/{{question.id}}">{{question.title}}</a></blockquote>
 			<div ng-if="question.description.length > 0">
 		        {{question.description}}
 		    </div>
