@@ -90,6 +90,14 @@ ServicesModule.factory('Questions',function() {
 		askQuestion: function(question) {
 			_.extend(question, {id: data.length + 1, answers: 0});
 			return data.push(question); //return the length of data
+		},
+		queryByCategory: function(id){
+
+			var arrayResult = _.filter(data, function(q){ 
+				return q.categoryIDs.indexOf(id) != -1 
+			});
+
+			return arrayResult;
 		}
 	}
 	return Questions;
