@@ -1,4 +1,4 @@
-var QAP = angular.module('QAP', ['QuestionsList']);
+var QAP = angular.module('QAP', ['QuestionControllers']);
 
 function QAPRouteConfig($routeProvider) {
 	$routeProvider
@@ -9,6 +9,10 @@ function QAPRouteConfig($routeProvider) {
 	.when('/category/:id', {
 		controller: 'QuestionsListController',
 		templateUrl: 'views/questions-list.html'
+	})
+	.when('/q-details/:id', {
+		controller: 'QuestionDetailsController',
+		templateUrl: 'views/question-details.html'
 	})
 	.when('/ask-question', {
 		controller: 'AskQuestionController',
@@ -31,4 +35,4 @@ QAP.controller('CategoriesListController', function ($scope, Categories) {
 			$scope.selectedCategory = categoryId;		
        	}
 
-    });
+ });
