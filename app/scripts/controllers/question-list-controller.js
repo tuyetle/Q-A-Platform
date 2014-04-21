@@ -3,8 +3,8 @@ var QuestionControllers = angular.module('QuestionControllers', ['services']);
 
 QuestionControllers.controller('QuestionsListController', function($scope, Questions, $routeParams) {
 	if($routeParams.id) {
-		console.log($routeParams.id);
-		// $scope.questions = Questions.queryByCategory();
+		$scope.questions = Questions.queryByCategory($routeParams.id);
+		console.log($scope.questions.length);
 	} else {
 		$scope.questions = Questions.query();
 	}
