@@ -25,6 +25,12 @@ function QAPRouteConfig($routeProvider) {
 
 QAP.config(QAPRouteConfig);
 
+QAP.controller('MainController', function ($scope, $location) {
+	$scope.askQuestionPath = '#/ask-question';
+	$scope.$location = $location;
+	$scope.locationPath = $location.path();
+});
+
 QAP.controller('CategoriesListController', function ($scope, Categories) {
         // Category
         $scope.categoryList = Categories.query();
