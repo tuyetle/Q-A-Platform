@@ -149,6 +149,7 @@ ServicesModule.factory('Questions',function() {
 					return data[i];
 				}
    			};
+   			return null;
 		}
 	}
 	return Questions;
@@ -302,7 +303,7 @@ ServicesModule.factory('Answers', function() {
 			return data;
 		},
 		getAnswersByQuestionId: function(id) {
-			return (data[id].length > 0 ? data[id] : null);
+			return data[id];
 		}
 	};
 	return Answers;
