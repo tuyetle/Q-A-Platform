@@ -1,9 +1,19 @@
 <div class="panel panel-default">
-	<div class="panel-heading">
-	    <ul class="nav nav-pills">
+	<div class="panel-heading clearfix">
+	    <ul class="nav nav-pills pull-left">
 		  <li class="active"><a href="#/recent">Recent</a></li>
 		  <li><a href="#/popular">Popular</a></li>
 		</ul>
+		  	<ul class="pagination pull-right">
+	  <li><a href="#">&laquo;</a></li>
+	  <li><a href="#">1</a></li>
+	  <li><a href="#">2</a></li>
+	  <li><a href="#">3</a></li>
+	  <li><a href="#">4</a></li>
+	  <li><a href="#">5</a></li>
+	  <li><a href="#">&raquo;</a></li>
+	</ul>
+
 	 </div>
 	<ul class="list-group">
 		<li ng-repeat="question in questions" class="list-group-item">						
@@ -18,5 +28,15 @@
 			<p class="categories clearfix">Tags: <span ng-repeat="category in getCategoryNames(question.categoryIDs)" class="badge">{{ category }}</span> </p>
 		</li>	
 	</ul>
-  <div class="panel-footer">Panel footer</div>
+  <div class="panel-footer">
+  	<ul class="pagination">
+	  <li><a href="#">&laquo;</a></li>
+	  <li><a href="#">1</a></li>
+	  <li><a href="#">2</a></li>
+	  <li><a href="#">3</a></li>
+	  <li><a href="#">4</a></li>
+	  <li><a href="#">5</a></li>
+	  <li><a href="#">&raquo;</a></li>
+	</ul>
+  </div>
 </div>
