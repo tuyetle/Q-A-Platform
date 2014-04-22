@@ -1,3 +1,5 @@
+body { padding-top: 70px; }
+
 .categories .badge {
 	margin-left: 4px;
 }
@@ -10,6 +12,9 @@
 .panel-heading .pagination {
 	margin: 3px 0px 0px 0px;
 }
-
+.ask-question-form .checkbox-inline {
+	margin-left: 0px !important;
+	margin-right: 10px;
+}
 #commentArea .comment{width:100%;height:100px;padding:10px;border-radius:10px;outline:0}
 #commentArea .buttons{text-align:right}
