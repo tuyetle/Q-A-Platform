@@ -29,10 +29,9 @@ QAP.controller('CategoriesListController', function ($scope, Categories) {
         // Category
         $scope.categoryList = Categories.query();
 
-       	$scope.selectedCategory = '01';
+       	$scope.selectedCategory = '-1';
 
-       	$scope.selectCategory = function(categoryId){
-			$scope.selectedCategory = categoryId;		
+       	$scope.selectCategory = function(id) {
+       		$scope.selectedCategory = id;
        	}
-
  });

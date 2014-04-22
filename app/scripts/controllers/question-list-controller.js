@@ -13,12 +13,7 @@ QuestionControllers.controller('QuestionsListController', function($scope, Quest
 	} else {
 		$scope.questions = Questions.query();
 	}
-	$scope.getCategoryNames = function(ids) {
-		return Categories.getCategoryNamesByIDs(ids);
-	}
 	
-
-
 	$scope.changePredicate = function(newPredicate) {
 		switch(newPredicate) {
 			case 'popular':
@@ -33,6 +28,11 @@ QuestionControllers.controller('QuestionsListController', function($scope, Quest
 	}
 });
 
+QuestionControllers.controller('QuestionsListItemController', function($scope, Answers, Categories) {
+	$scope.answersLength = Answers.getAnswersLengthByQuestionId($scope.question.id);
+	$scope.statusLabelClass = $scope.answersLength > 0 ? 'label-success':'label-default';
+	$scope.categories = Categories.getCategoriesByIDs($scope.question.categoryIDs);
+});
 
 QuestionControllers.controller('AskQuestionController', function($scope, Questions, Categories) {
 	$scope.newQuestion = {};
