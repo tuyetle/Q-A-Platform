@@ -10,6 +10,6 @@
 .panel-heading .pagination {
 	margin: 3px 0px 0px 0px;
 }
-/*.btn-ask {
-	width: 100%;
-}*/
+
+#commentArea .comment{width:100%;height:100px;padding:10px;border-radius:10px;outline:0}
+#commentArea .buttons{text-align:right}

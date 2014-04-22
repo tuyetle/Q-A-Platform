@@ -49,14 +49,22 @@ QuestionControllers.controller('AskQuestionController', function($scope, Questio
 	      $scope.selectedCategories.push(item);
 	    }
 	}
-	$scope.askQuestion = function() {
+	$scope.askQuestion = function () {
 		$scope.newQuestion.categories = $scope.selectedCategories;
 		$scope.newQuestion.date = "21-04-2014";
 		Questions.askQuestion($scope.newQuestion);
 	}
 });
 
-QuestionControllers.controller('QuestionDetailsController', function($scope, $routeParams) {
-	console.log('QuestionDetailsController');
-	$scope.testID = $routeParams.id;
+QuestionControllers.controller('QuestionDetailsController', function($scope, Questions, Answers, $routeParams) {
+	
+	$scope.questionId = $routeParams.id;
+	$scope.question = Questions.getQuestionDetail($scope.questionId);
+	$scope.answersForThis = Answers.getAnswersByQuestionId($scope.questionId);
+	
+	$scope.resetAnswer = function (obj, event) {
+		console.log(obj)
+		console.log(event)
+	}
+	
 });

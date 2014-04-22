@@ -1,3 +1,38 @@
-<h2>Question Details</h2>
-<p>Test: {{ testID }}</p>
 <a href="#/">Back to list</a>
+
+<div id="questionDetail">
+	<h1>{{ question.title }}</h1>
+	
+	<div class="detail">{{ question.description }}</div>
+	
+	<br />
+	<div class="author">{{ question.user }}</div><div class="date">{{ question.date }}</div>
+	<br />
+	<br />
+</div><!--/questionDetail-->
+
+<fieldset id="commentArea">
+	<legend>Add An Answer</legend>
+	<textarea class="comment"></textarea>
+	<div class="buttons">
+	<button ng-click="addAnswer()">Send Answer</button>
+	<button ng-click="resetAnswer()">Reset</button>
+	</div>
+</fieldset><!--/commentArea-->
+
+<div id="answersArea">
+	<br />
+	<div ng-repeat="answer in answersForThis | orderBy:point:reverse">
+		<div>{{ answer.content }}</div>
+		<br />
+		<span class="author">{{ answer.author }}</span>&nbsp;&nbsp;
+		<span class="date">{{ answer.date }}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<span class="point"><strong>{{ answer.point }}</strong></span>
+		<button ng-click="like()">+1</button>
+		<button ng-click="unlike">-1</button>
+		<hr />
+	</div>
+	
+</div><!--/answersArea-->
+
+<br /><br /><br />
