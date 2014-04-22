@@ -123,7 +123,8 @@ ServicesModule.factory('Categories', function() {
    			var arr = [];
    			for (var i = 0; i < ids.length; i++) {
    				var id = ids[i];
-   				arr.push(data[id].name);
+   				if(data[id])
+   					arr.push(data[id].name);
    			};
    			return arr;
    		}

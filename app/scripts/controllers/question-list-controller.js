@@ -2,6 +2,12 @@ var QuestionControllers = angular.module('QuestionControllers', ['services']);
 
 
 QuestionControllers.controller('QuestionsListController', function($scope, Questions, Categories, $routeParams) {
+	
+	$scope.sortOption = {
+		predicate: 'title',
+		reverse: false
+	};
+
 	if($routeParams.id) {
 		$scope.questions = Questions.queryByCategory($routeParams.id);
 	} else {
@@ -9,6 +15,21 @@ QuestionControllers.controller('QuestionsListController', function($scope, Quest
 	}
 	$scope.getCategoryNames = function(ids) {
 		return Categories.getCategoryNamesByIDs(ids);
+	}
+	
+
+
+	$scope.changePredicate = function(newPredicate) {
+		switch(newPredicate) {
+			case 'popular':
+				$scope.sortOption.predicate = "anwsers";
+				$scope.sortOption.reverse = true;
+				break;
+			default:
+				$scope.sortOption.predicate = "title";
+				$scope.sortOption.reverse = false;
+				break;
+		}
 	}
 });
 
