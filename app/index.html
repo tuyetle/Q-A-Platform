@@ -50,6 +50,9 @@
 		<div class="row">
 			<div class="col-xs-2">
 				<ul class="list-group" ng-controller="CategoriesListController">
+					<li class="list-group-item">
+						<a href="#/">All Categories</a>
+					</li>
 				  <li ng-repeat="categoty in categoryList" ng-class="{active:categoty.id==selectedCategory}" class="list-group-item"> 
 				    <span class="badge">{{categoty.number}}</span>
 				   	<a ng-click="selectCategory(categoty.id)" href="#/category/{{categoty.id}}">{{categoty.name}}</a>

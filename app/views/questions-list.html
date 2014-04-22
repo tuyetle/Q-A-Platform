@@ -1,4 +1,4 @@
-<div class="panel panel-primary">
+<div class="panel panel-default">
 	<div class="panel-heading">
 	    <h3 class="panel-title"><a href="#">Recent</a><a href="#">Popular</a></h3>
 	 </div>
@@ -11,10 +11,11 @@
 			<p ng-show="question.description.length > 0">
 		        {{question.description}}
 		    </p>
-			<span class="glyphicon glyphicon-user"> {{question.user}}</span>
-			<span class="glyphicon glyphicon-calendar pull-right"> {{question.date}}</span><br />
-			<span class="label label-success"> {{question.anwsers}} anwsers</span>
-			<p><span ng-repeat="category in question.categoryIDs">{{ category }}</span></p>
+			<div class="clearfix">
+				<p class="pull-left"><small>Asked by <b><i>{{question.user}}</i></b> in <b>{{question.date}}</b></small> </p>
+				<p class="pull-right"><span class="label label-success">{{question.anwsers}} anwsers</span></p>
+			</div>
+			<p class="categories clearfix">Tags: <span ng-repeat="category in getCategoryNames(question.categoryIDs)" class="badge">{{ category }}</span> </p>
 		</li>	
 	</ul>
   <div class="panel-footer">Panel footer</div>
