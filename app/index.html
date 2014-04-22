@@ -16,12 +16,12 @@
 	<script type="text/javascript" src="scripts/app.js"></script>
 </head>
 <body>
-	
+
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-2">
 				<a href="#/"><img src="images/logo.jpg" width="150" alt="Q&A" class="img-rounded"></a>
-				
+
 			</div>
 			<div class="col-xs-10">
 				<div class="page-header row">
@@ -32,7 +32,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="row">
 			<div class="col-xs-12">
 				<form class="form-horizontal" role="form">
@@ -43,14 +43,14 @@
 				  <div class="col-xs-2">
 				  	<button type="submit" class="btn btn-info">Search</button>
 				  </div>
-				  
+
 				</form>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-xs-2">
 				<ul class="list-group" ng-controller="CategoriesListController">
-				  <li ng-repeat="categoty in categoryList" ng-class="{active:categoty.id==selectedCategory}" class="list-group-item"> 
+				  <li ng-repeat="categoty in categoryList" ng-class="{active:categoty.id==selectedCategory}" class="list-group-item">
 				    <span class="badge">{{categoty.number}}</span>
 				   	<a ng-click="selectCategory(categoty.id)" href="#/category/{{categoty.id}}">{{categoty.name}}</a>
 				  </li>
@@ -67,7 +67,7 @@
 				</div>
 			</div>
 			<div class="col-xs-7" ng-view>
-				
+
 			</div>
 			<div class="col-xs-3">
 				<div class="panel panel-danger">
@@ -79,7 +79,7 @@
 				        <button class="btn btn-danger" type="button">?</button>
 				      </span>
 				    </div> -->
-				    <a href="#/ask-question">Click to ask</a>
+				    <a href="#/ask-question" class="btn btn-danger"><span class="glyphicon glyphicon-question-sign"></span> Click to ask</a>
 				  </div>
 				</div>
 			</div>
