@@ -25,7 +25,7 @@
 				<p class="pull-left"><small>Asked by <b><i>{{question.user}}</i></b> in <b>{{question.date | date: 'medium'}}</b></small> </p>
 				<p class="pull-right"><span ng-class="{'label-success': question.anwsers > 0, 'label-default': question.anwsers == 0}" class="label">{{question.anwsers}} anwsers</span></p>
 			</div>
-			<p class="categories clearfix">Tags: <span ng-repeat="category in getCategoryNames(question.categoryIDs)" class="badge">{{ category }}</span> </p>
+			<p class="categories clearfix">Tags: <a href="#/category/{{category}}}" ng-repeat="category in getCategoryNames(question.categoryIDs)" class="badge">{{ category }}</a> </p>
 		</li>	
 	</ul>
   <div class="panel-footer">
