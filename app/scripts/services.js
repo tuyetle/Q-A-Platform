@@ -112,7 +112,6 @@ ServicesModule.factory('Categories', function() {
         	'05': {'id': '05', 'name': 'Computers & Internet'},
         	'06': {'id': '06', 'name': 'Dining Out'},
         	'07': {'id': '07', 'name': 'Consumer Electronics'},
-        	'08': {'id': '08', 'name': 'Máy tính và Internet'},
         	'09': {'id': '09', 'name': 'Entertainment & Music'},
         	'10': {'id': '10', 'name': 'Education & Reference'}
        	};
@@ -120,8 +119,13 @@ ServicesModule.factory('Categories', function() {
    		query: function() {
    			return data;
    		},
-   		getCategoryNameByID: function(id) {
-   			return data[id][name];
+   		getCategoryNamesByIDs: function(ids) {
+   			var arr = [];
+   			for (var i = 0; i < ids.length; i++) {
+   				var id = ids[i];
+   				arr.push(data[id].name);
+   			};
+   			return arr;
    		}
    	};
 	return Categories;
