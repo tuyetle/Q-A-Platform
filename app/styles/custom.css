@@ -1,0 +1,12 @@
+.categories .badge {
+	margin-left: 4px;
+}
+.categories .glyphicon.glyphicon-tags {
+	margin-right: 6px;
+}
+.search-row {
+	margin-bottom: 20px;
+}
+.panel-heading .pagination {
+	margin: 3px 0px 0px 0px;
+}
