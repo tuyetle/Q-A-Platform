@@ -41,9 +41,12 @@ QuestionControllers.controller('QuestionDetailsController', function($scope, Que
 	$scope.question = Questions.getQuestionDetail($scope.questionId);
 	$scope.answersForThis = Answers.getAnswersByQuestionId($scope.questionId);
 	
-	$scope.resetAnswer = function (obj, event) {
-		console.log(obj)
-		console.log(event)
-	}
+	$scope.resetAnswer = function (event) {
+		
+	};
+	
+	$scope.addAnswer = function (event) {
+		//$(''
+	};
 	
 });
