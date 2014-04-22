@@ -2,16 +2,37 @@ var QuestionControllers = angular.module('QuestionControllers', ['services']);
 
 
 QuestionControllers.controller('QuestionsListController', function($scope, Questions, Categories, $routeParams) {
+	
+	$scope.sortOption = {
+		predicate: 'title',
+		reverse: false
+	};
+
 	if($routeParams.id) {
 		$scope.questions = Questions.queryByCategory($routeParams.id);
 	} else {
 		$scope.questions = Questions.query();
 	}
-	$scope.getCategoryNames = function(ids) {
-		return Categories.getCategoryNamesByIDs(ids);
+	
+	$scope.changePredicate = function(newPredicate) {
+		switch(newPredicate) {
+			case 'popular':
+				$scope.sortOption.predicate = "anwsers";
+				$scope.sortOption.reverse = true;
+				break;
+			default:
+				$scope.sortOption.predicate = "title";
+				$scope.sortOption.reverse = false;
+				break;
+		}
 	}
 });
 
+QuestionControllers.controller('QuestionsListItemController', function($scope, Answers, Categories) {
+	$scope.answersLength = Answers.getAnswersLengthByQuestionId($scope.question.id);
+	$scope.statusLabelClass = $scope.answersLength > 0 ? 'label-success':'label-default';
+	$scope.categories = Categories.getCategoriesByIDs($scope.question.categoryIDs);
+});
 
 QuestionControllers.controller('AskQuestionController', function($scope, Questions, Categories) {
 	$scope.newQuestion = {};
@@ -35,18 +56,35 @@ QuestionControllers.controller('AskQuestionController', function($scope, Questio
 	}
 });
 
-QuestionControllers.controller('QuestionDetailsController', function($scope, Questions, Answers, $routeParams) {
-	
+QuestionControllers.controller('AnswerItemController', function ($scope, Answers, Users, $routeParams, $routeParams) {
+	$scope.questionId = $routeParams.id;
+	$scope.answers = Answers.getAnswerById($scope.questionId, $scope.answer.id);
+	$scope.answerUser = Users.getUserById($scope.answers.userID);
+});
+
+QuestionControllers.controller('QuestionDetailsController', function($scope, Questions, Answers, Users, $routeParams) {
 	$scope.questionId = $routeParams.id;
 	$scope.question = Questions.getQuestionDetail($scope.questionId);
+	$scope.questionOwner = Users.getUserById($scope.question.userID);
+	
 	$scope.answersForThis = Answers.getAnswersByQuestionId($scope.questionId);
-	
-	$scope.resetAnswer = function (event) {
-		
+});
+
+QuestionControllers.controller('AddAnswerController', function($scope, Answers, Users, $routeParams) {
+
+	$scope.questionId = $routeParams.id;
+	$scope.newAnswer = {
+		'id': null,
+		'date': null,
+		'userID': Users.getCurrentUser().id,
+		'content': null,
+		'point': 0
 	};
-	
-	$scope.addAnswer = function (event) {
-		//$(''
+
+	$scope.addAnswer = function () {
+		var today = new Date();
+		$scope.newAnswer.date = today;
+		Answers.insertAnswer($scope.questionId, $scope.newAnswer);
 	};
-	
+
 });
