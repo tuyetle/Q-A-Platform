@@ -1,38 +1,47 @@
-<a href="#/">Back to list</a>
+<div id="questionPage">
 
-<div id="questionDetail">
-	<h1>{{ question.title }}</h1>
-	
-	<div class="detail">{{ question.description }}</div>
-	
-	<br />
-	<div class="author">{{ question.user }}</div><div class="date">{{ question.date }}</div>
-	<br />
-	<br />
-</div><!--/questionDetail-->
+	<a href="#/">Back to list</a>
 
-<fieldset id="commentArea">
-	<legend>Add An Answer</legend>
-	<textarea ng-model="comment" class="comment"></textarea>
-	<div class="buttons">
-	<button ng-click="addAnswer()">Send Answer</button>
-	<button ng-click="resetAnswer()">Reset</button>
-	</div>
-</fieldset><!--/commentArea-->
-
-<div id="answersArea">
-	<br />
-	<div ng-repeat="answer in answersForThis | orderBy:point:reverse">
-		<div>{{ answer.content }}</div>
+	<div id="questionDetail">
+		<h1>{{ question.title }}</h1>
+		
+		<div class="detail">{{ question.description }}</div>
+		
 		<br />
-		<span class="author">{{ answer.author }}</span>&nbsp;&nbsp;
-		<span class="date">{{ answer.date }}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<span class="point"><strong>{{ answer.point }}</strong></span>
-		<button ng-click="like()">+1</button>
-		<button ng-click="unlike">-1</button>
-		<hr />
-	</div>
-	
-</div><!--/answersArea-->
+		<div class="author col-xs-12 col-md-8"><strong>{{ questionOwner.name }}</strong><span>{{ questionOwner.point }}</span></div>
+		<div class="date col-xs-6 col-md-4">{{ question.date }}</div>
+		<br />
+		<br />
+	</div><!--/questionDetail-->
 
-<br /><br /><br />
+	<fieldset id="commentArea" ng-controller="AddAnswerController">
+		<div class="form-group">
+			<label>Your Answer</label>
+			<textarea class="form-control" rows="3" ng-model="newAnswer.content"></textarea>
+		</div>
+		<div class="form-group">
+			<button ng-click="addAnswer()" class="btn btn-primary">Send Answer</button>
+			<button ng-click="resetAnswer()" class="btn btn-primary">Reset</button>
+		</div>
+	</fieldset><!--/commentArea-->
+
+	<br />
+
+	<div id="answersArea">
+		<div class="answer clearfix" ng-controller="AnswerItemController" ng-repeat="answer in answersForThis | orderBy:point:reverse">
+			
+			<div class="pointArea">
+				<button ng-click="like()" class="btn btn-success btn-xs glyphicon glyphicon-plus"></button>
+				<strong class="point" ng-class="{danger: answer.point < 0}">{{ answer.point }}</strong>
+				<button ng-click="unlike" class="btn btn-danger btn-xs glyphicon glyphicon-minus"></button>
+			</div>
+			
+			<div class="answerContent">{{ answer.content }}</div>
+			
+			<div class="author col-xs-12 col-md-8"><strong>{{ answerUser.name }}</strong><span>{{ answerUser.point }}</span></div>
+			<div class="date col-xs-6 col-md-4">{{ answer.date }}</div>
+			<hr />
+		</div>
+	</div><!--/answersArea-->
+
+</div>

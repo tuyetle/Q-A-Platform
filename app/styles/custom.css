@@ -1,3 +1,5 @@
+body { padding-top: 70px; }
+
 .categories .badge {
 	margin-left: 4px;
 }
@@ -10,6 +12,24 @@
 .panel-heading .pagination {
 	margin: 3px 0px 0px 0px;
 }
+.ask-question-form .checkbox-inline {
+	margin-left: 0px !important;
+	margin-right: 10px;
+}
 
-#commentArea .comment{width:100%;height:100px;padding:10px;border-radius:10px;outline:0}
-#commentArea .buttons{text-align:right}
+*{outline:none!important}
+
+#answersArea .answer{width:88%}
+#answersArea .answer:nth-child(even){margin-left:12%}
+
+#questionPage{padding:0 0 50px}
+#questionPage hr{clear:both}
+#questionPage .author{padding-left:0;clear:both;padding-bottom:10px}
+#questionPage .author strong{color:#4a6b82}
+#questionPage .author span{color:#444;margin-left:5px}
+#questionPage .date{text-align:right;color:#999;padding-right:0;padding-bottom:10px}
+#questionPage .answerContent{overflow:hidden}
+#questionPage .pointArea{float:right;text-align:center;padding:0 0 10px 10px}
+#questionPage .pointArea *{vertical-align:middle}
+#questionPage .pointArea .point{font-size:18px;color:green}
+#questionPage .pointArea .point.danger{color:red}
