@@ -1,10 +1,10 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
-	    <h3 class="panel-title"><a href="#">Recent</a><a href="#">Popular</a></h3>
+	    <ul class="nav nav-pills">
+		  <li class="active"><a href="#/recent">Recent</a></li>
+		  <li><a href="#/popular">Popular</a></li>
+		</ul>
 	 </div>
-	<div class="panel-body">
-		
-	</div>
 	<ul class="list-group">
 		<li ng-repeat="question in questions" class="list-group-item">						
 			<blockquote><a href="#/q-details/{{question.id}}">{{question.title}}</a></blockquote>
