@@ -1,12 +1,14 @@
 var QuestionControllers = angular.module('QuestionControllers', ['services']);
 
 
-QuestionControllers.controller('QuestionsListController', function($scope, Questions, $routeParams) {
+QuestionControllers.controller('QuestionsListController', function($scope, Questions, Categories, $routeParams) {
 	if($routeParams.id) {
 		$scope.questions = Questions.queryByCategory($routeParams.id);
-		console.log($scope.questions.length);
 	} else {
 		$scope.questions = Questions.query();
+	}
+	$scope.getCategoryNames = function(ids) {
+		return Categories.getCategoryNamesByIDs(ids);
 	}
 });
 
@@ -30,14 +32,6 @@ QuestionControllers.controller('AskQuestionController', function($scope, Questio
 		$scope.newQuestion.categories = $scope.selectedCategories;
 		$scope.newQuestion.date = "21-04-2014";
 		Questions.askQuestion($scope.newQuestion);
-	}
-
-	$scope.getCategoryNames = function(ids) {
-		var arr = [];
-		for (var i = 0; i < ids.length; i ++) {
-			arr.push(Categories.getCategoryNameByID(id));
-		}
-		return arr;
 	}
 });
 
