@@ -1,7 +1,10 @@
 body { padding-top: 70px; }
-
-.categories .badge {
+h1 a:hover {
+	text-decoration: none;
+}
+.categories .label {
 	margin-left: 4px;
+	font-size: 70%;
 }
 .categories .glyphicon.glyphicon-tags {
 	margin-right: 6px;
