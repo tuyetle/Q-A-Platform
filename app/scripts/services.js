@@ -143,6 +143,9 @@ ServicesModule.factory('Questions',function() {
 
 			return arrayResult;
 		},
+		getQuestionLengthByCategory: function(id) {
+			return this.queryByCategory(id).length;
+		},
 		getQuestionDetail: function (id) {
 			for (var i = 0; i < data.length; i++) {
    				if ( data[i].id == id ) {

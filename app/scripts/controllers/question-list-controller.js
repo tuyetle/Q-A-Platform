@@ -2,7 +2,8 @@ var QuestionControllers = angular.module('QuestionControllers', ['services']);
 
 
 QuestionControllers.controller('QuestionsListController', function($scope, Questions, Categories, $routeParams) {
-	
+	$scope.showCarousel = true;
+
 	$scope.sortOption = {
 		predicate: 'title',
 		reverse: false
@@ -10,6 +11,7 @@ QuestionControllers.controller('QuestionsListController', function($scope, Quest
 
 	if($routeParams.id) {
 		$scope.questions = Questions.queryByCategory($routeParams.id);
+		$scope.showCarousel = false;
 	} else {
 		$scope.questions = Questions.query();
 	}

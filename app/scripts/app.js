@@ -32,12 +32,16 @@ QAP.controller('MainController', function ($scope, $location) {
 });
 
 QAP.controller('CategoriesListController', function ($scope, Categories) {
-        // Category
-        $scope.categoryList = Categories.query();
+    // Category
+    $scope.categoryList = Categories.query();
 
-       	$scope.selectedCategory = '-1';
+   	$scope.selectedCategory = '-1';
 
-       	$scope.selectCategory = function(id) {
-       		$scope.selectedCategory = id;
-       	}
+   	$scope.selectCategory = function(id) {
+   		$scope.selectedCategory = id;
+   	}
  });
+
+QAP.controller('CategoryListItemController', function ($scope, Questions) {
+	$scope.questionLength = Questions.getQuestionLengthByCategory($scope.category.id);
+});
