@@ -52,14 +52,17 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-2">
-				<ul class="nav nav-pills nav-stacked" ng-controller="CategoriesListController">
-					<li ng-class="{active: selectedCategory=='-1'}">
-						<a href="#/" ng-click="selectCategory('-1')" >All Categories</a>
-					</li>
-				  <li ng-controller="CategoryListItemController" ng-repeat="category in categoryList" ng-class="{active: category.id==selectedCategory}"> 
-				   	<a ng-click="selectCategory(category.id)" title="{{category.name}}" href="#/category/{{category.id}}">{{category.name}} <span class="badge badge-primary">{{questionLength}}</span></a>
-				  </li>
-				</ul>
+				<div class="category-container">
+					<ul class="nav nav-pills nav-stacked category-list-sidebar" ng-controller="CategoriesListController">
+						<li ng-class="{active: selectedCategory=='-1'}">
+							<a href="#/" ng-click="selectCategory('-1')" >All Categories</a>
+						</li>
+					  <li ng-controller="CategoryListItemController" ng-repeat="category in categoryList" ng-class="{active: category.id==selectedCategory}"> 
+					   	<a ng-click="selectCategory(category.id)" title="{{category.name}}" href="#/category/{{category.id}}">{{category.name}} <span class="badge badge-primary">{{questionLength}}</span></a>
+					  </li>
+					</ul>
+				</div>
+				
 			</div>
 			<div class="col-xs-7" ng-view>
 
