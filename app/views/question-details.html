@@ -17,7 +17,7 @@
 	<fieldset id="commentArea" ng-controller="AddAnswerController">
 		<div class="form-group">
 			<label>Your Answer</label>
-			<textarea class="form-control" rows="3" ng-model="newAnswer.content"></textarea>
+			<textarea class="form-control" rows="3" ng-model="newAnswerContent"></textarea>
 		</div>
 		<div class="form-group">
 			<button ng-click="addAnswer()" class="btn btn-primary">Send Answer</button>
@@ -28,7 +28,7 @@
 	<br />
 
 	<div id="answersArea">
-		<div class="answer clearfix" ng-controller="AnswerItemController" ng-repeat="answer in answersForThis | orderBy:'point':true">
+		<div class="answer clearfix" ng-controller="AnswerItemController" ng-repeat="answer in answersForThis | orderBy:'point':true" data-id="{{ answer.id }}" >
 			
 			<div class="pointArea">
 				<button ng-click="like()" class="btn btn-success btn-xs glyphicon glyphicon-plus"></button>
