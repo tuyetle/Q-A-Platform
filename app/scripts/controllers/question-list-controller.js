@@ -58,15 +58,35 @@ QuestionControllers.controller('AskQuestionController', function($scope, Questio
 	}
 });
 
-QuestionControllers.controller('QuestionDetailsController', function($scope, Questions, Answers, $routeParams) {
-	
+QuestionControllers.controller('AnswerItemController', function ($scope, Answers, Users, $routeParams, $routeParams) {
+	$scope.questionId = $routeParams.id;
+	$scope.answers = Answers.getAnswerById($scope.questionId, $scope.answer.id);
+	$scope.answerUser = Users.getUserById($scope.answers.userID);
+});
+
+QuestionControllers.controller('QuestionDetailsController', function($scope, Questions, Answers, Users, $routeParams) {
 	$scope.questionId = $routeParams.id;
 	$scope.question = Questions.getQuestionDetail($scope.questionId);
+	$scope.questionOwner = Users.getUserById($scope.question.userID);
+	
 	$scope.answersForThis = Answers.getAnswersByQuestionId($scope.questionId);
-	
-	$scope.resetAnswer = function (obj, event) {
-		console.log(obj)
-		console.log(event)
-	}
-	
+});
+
+QuestionControllers.controller('AddAnswerController', function($scope, Answers, Users, $routeParams) {
+
+	$scope.questionId = $routeParams.id;
+	$scope.newAnswer = {
+		'id': null,
+		'date': null,
+		'userID': Users.getCurrentUser().id,
+		'content': null,
+		'point': 0
+	};
+
+	$scope.addAnswer = function () {
+		var today = new Date();
+		$scope.newAnswer.date = today;
+		Answers.insertAnswer($scope.questionId, $scope.newAnswer);
+	};
+
 });
