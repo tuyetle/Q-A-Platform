@@ -87,7 +87,7 @@ ServicesModule.factory('Questions',function() {
 		description: 'I accedently sitched off my pc directly through ups! after that my pc recoverd automatically! after that i cant see any text under folders and icons in desktop! my start menu dosent open,...',
 		user: "cammy",
 		date: '20-04-2014',
-		categoryIDs: ['05, 10']
+		categoryIDs: ['05','10']
 	}, {
 		id: 7,
 		title: 'What are your top ten Disney movies?',
