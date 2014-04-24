@@ -6,26 +6,31 @@ ServicesModule.factory('Users',function () {
 			id: 1,
 			name: 'Hòa',
 			joinDate: '01-01-2014',
+			avatar: 'http://cozio.com/forum/Skins/Classic/Images/EmotIcons/Blink.gif',
 			point: 754
 		},{
 			id: 2,
 			name: 'Tuyết',
 			joinDate: '01-01-2014',
+			avatar: 'http://m.essentialbaby.com.au/forums/public/style_emoticons/default/biggrin.png',
 			point: 812
 		},{
 			id: 3,
 			name: 'Tuyến',
 			joinDate: '01-01-2014',
+			avatar: 'http://www.essentialbaby.com.au/forums/style_emoticons/default/glare.gif',
 			point: 813
 		},{
 			id: 4,
 			name: 'Thảo',
 			joinDate: '01-01-2014',
+			avatar: 'http://community.babycenter.com/js/tinymce_3_5_6/plugins/smileys/img/smiley-yell.gif',
 			point: 566
 		},{
 			id: 5,
 			name: 'Long',
 			joinDate: '01-01-2014',
+			avatar: 'http://community.babycenter.com/js/tinymce_3_2_5/plugins/smileys/img/smiley-cool.gif',
 			point: 235
 		}
 	];
