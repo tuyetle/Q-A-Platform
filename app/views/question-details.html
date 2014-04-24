@@ -4,18 +4,12 @@
 
 	<div id="questionDetail" class="media">
 		
-		<!--<div class="pull-left">
-			<div ng-click="like()" class="like"></div>
-			<div class="point" ng-class="{danger: answer.point < 0}">{{ answer.point }}</div>
-			<div ng-click="dislike()" class="dislike"></div>
-		</div>-->
-		
 		<div class="media-body">
 			<h1 class="media-heading">{{ question.title }}</h1>
 			<div class="detail">{{ question.description }}</div>
 			
 			<br>
-			<div class="date pull-right">asked  {{ question.date }}</div>
+			<div class="date pull-right">asked  {{ question.date | date:'dd-MM-yyyy hh:mm' }}</div>
 			<div class="author pull-left"><img src="{{questionOwner.avatar}}" alt="" width="20" height="20"><strong>{{ questionOwner.name }}</strong> <span>{{ questionOwner.point }}</span></div>
 		</div>
 	</div><!--/questionDetail-->
@@ -43,7 +37,7 @@
 			
 			<div class="media-body">
 				<div class="answer-content">{{ answer.content }}</div>
-				<div class="date pull-right">answered {{ answer.date }}</div>
+				<div class="date pull-right">answered {{ answer.date | smartDateTime }}</div>
 				<div class="author pull-left"><img src="{{answerUser.avatar}}" alt="" width="20" height="20"><strong>{{ answerUser.name }}</strong> <span>{{ answerUser.point }}</span></div>
 			</div>
 			
