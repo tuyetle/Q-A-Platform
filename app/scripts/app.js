@@ -24,7 +24,7 @@ function QAPRouteConfig($routeProvider) {
 }
 
 QAP.config(QAPRouteConfig);
-
+QAP.currentUserId = 5;
 QAP.cookies = {
 	'answers': 'answers',
 	'users': 'users',
@@ -60,4 +60,14 @@ QAP.controller('CategoriesListController', function ($scope, Categories) {
    	$scope.selectCategory = function(id) {
    		$scope.selectedCategory = id;
    	}
+});
+
+QAP.controller('UsersController', function ($scope, Users) {
+    $scope.users = Users.query();
+	$scope.currentUser = Users.getUserById(QAP.currentUserId);
+	$scope.login = function (id) {
+		$scope.currentUser = Users.getUserById(id);
+		QAP.currentUserId = $scope.currentUser.id;
+		return false;
+	};
 });
