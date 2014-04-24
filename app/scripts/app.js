@@ -28,10 +28,11 @@ QAP.config(QAPRouteConfig);
 QAP.cookies = {
 	'answers': 'answers',
 	'users': 'users',
-	'questions': 'questions'
+	'questions': 'questions',
+	'categories': 'categories'
 };
 
-QAP.controller('MainController', function ($scope, $location, $cookieStore, Questions, Answers, Users) {
+QAP.controller('MainController', function ($scope, $location, $cookieStore, Questions, Answers, Users, Categories) {
 	$scope.askQuestionPath = '#/ask-question';
 	$scope.$location = $location;
 	$scope.locationPath = $location.path();
@@ -47,6 +48,7 @@ QAP.controller('MainController', function ($scope, $location, $cookieStore, Ques
 	Questions.query();
 	Answers.query();
 	Users.query();
+	Categories.query();
 });
 
 QAP.controller('CategoriesListController', function ($scope, Categories) {
@@ -58,8 +60,4 @@ QAP.controller('CategoriesListController', function ($scope, Categories) {
    	$scope.selectCategory = function(id) {
    		$scope.selectedCategory = id;
    	}
- });
-
-QAP.controller('CategoryListItemController', function ($scope, Questions) {
-	$scope.questionLength = Questions.getQuestionLengthByCategory($scope.category.id);
 });

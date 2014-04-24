@@ -164,20 +164,23 @@ ServicesModule.factory('Questions',function($cookieStore) {
 	return Questions;
 });
 
-ServicesModule.factory('Categories', function() {
+ServicesModule.factory('Categories', function($cookieStore) {
 	var data = {
-		1: {'id': 1, 'name': 'Arts & Humanities'}, 
-		2: {'id': 2, 'name': 'Beauty & Style'},
-		3: {'id': 3, 'name': 'Business & Finance'},
-		4: {'id': 4, 'name': 'Cars & Transportation'}, 
-		5: {'id': 5, 'name': 'Computers & Internet'},
-		6: {'id': 6, 'name': 'Dining Out'},
-		7: {'id': 7, 'name': 'Consumer Electronics'},
-		9: {'id': 9, 'name': 'Entertainment & Music'},
-		10: {'id': 10, 'name': 'Education & Reference'}
+		1: {'id': 1, 'name': 'Arts & Humanities', 'total': 10}, 
+		2: {'id': 2, 'name': 'Beauty & Style', 'total': 6},
+		3: {'id': 3, 'name': 'Business & Finance', 'total': 5},
+		4: {'id': 4, 'name': 'Cars & Transportation', 'total': 9}, 
+		5: {'id': 5, 'name': 'Computers & Internet', 'total': 5},
+		6: {'id': 6, 'name': 'Dining Out', 'total': 6},
+		7: {'id': 7, 'name': 'Consumer Electronics', 'total': 8},
+		9: {'id': 9, 'name': 'Entertainment & Music', 'total': 12},
+		10: {'id': 10, 'name': 'Education & Reference', 'total': 8}
 	};
    	var Categories = {
    		query: function() {
+			if ( $cookieStore.get(QAP.cookies.categories) ) {
+				data = $cookieStore.get(QAP.cookies.categories);
+			}
    			return data;
    		},
    		getCategoriesByIDs: function(ids) {
@@ -188,7 +191,16 @@ ServicesModule.factory('Categories', function() {
    					arr.push(data[id]);
    			};
    			return arr;
-   		}
+   		},
+		change: function (arr) {
+			for (var i = 0; i < arr.length; i++) {
+				data[arr[i]].total++;
+			}
+			this.save();
+		},
+		save: function () {
+			$cookieStore.put(QAP.cookies.categories,data);
+		}
    	};
 	return Categories;
 });
