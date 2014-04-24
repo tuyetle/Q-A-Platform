@@ -67,6 +67,7 @@ QuestionControllers.controller('AnswerItemController', function ($scope, Answers
 	$scope.rate = function (point) {
 		if ( $scope.rateAvai ) {
 			Answers.rateAnswer($scope.questionId,$scope.answer.id,point,currentUserId);
+			$scope.rateAvai = 0;
 		}
 		return false;
 	};

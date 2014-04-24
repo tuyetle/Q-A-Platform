@@ -321,6 +321,7 @@ ServicesModule.factory('Answers', function() {
 				answer.ratedBy.push(currentUserId);
 				answer.point += point;
 			}
+			return false;
 		},
 		insertAnswer: function (questionId,answer) {
 			
