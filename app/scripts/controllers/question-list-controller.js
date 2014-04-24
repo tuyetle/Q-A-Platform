@@ -1,5 +1,5 @@
-var QuestionControllers = angular.module('QuestionControllers', ['services']);
-
+var QuestionControllers = angular.module('QuestionControllers', ['services']),
+	currentUserId = 4;
 
 QuestionControllers.controller('QuestionsListController', function($scope, Questions, Categories, $routeParams) {
 	$scope.showCarousel = true;
@@ -41,7 +41,6 @@ QuestionControllers.controller('AskQuestionController', function($scope, Questio
 	$scope.selectedCategories = [];
 	$scope.categoryList = Categories.query();
 
-
 	$scope.selectCategory = function(item) {
 		var idx = $scope.selectedCategories.indexOf(item);
 		 if (idx > -1) {
@@ -60,8 +59,12 @@ QuestionControllers.controller('AskQuestionController', function($scope, Questio
 
 QuestionControllers.controller('AnswerItemController', function ($scope, Answers, Users, $routeParams, $routeParams) {
 	$scope.questionId = $routeParams.id;
-	$scope.answers = Answers.getAnswerById($scope.questionId, $scope.answer.id);
-	$scope.answerUser = Users.getUserById($scope.answers.userID);
+	$scope.answer = Answers.getAnswerById($scope.questionId, $scope.answer.id);
+	$scope.answerUser = Users.getUserById($scope.answer.userID);
+	
+	$scope.rate = function (point) {
+		Answers.rateAnswer($scope.questionId,$scope.answer.id,point,currentUserId);
+	};
 });
 
 QuestionControllers.controller('QuestionDetailsController', function($scope, Questions, Answers, Users, $routeParams) {
@@ -83,7 +86,8 @@ QuestionControllers.controller('AddAnswerController', function($scope, Answers, 
 			'date': null,
 			'userID': Users.getCurrentUser().id,
 			'content': null,
-			'point': 0
+			'point': 0,
+			'ratedBy': []
 		};
 		var today = new Date();
 		$scope.newAnswer.date = today;

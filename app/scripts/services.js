@@ -6,26 +6,31 @@ ServicesModule.factory('Users',function () {
 			id: 1,
 			name: 'Hòa',
 			joinDate: '01-01-2014',
+			avatar: 'http://cozio.com/forum/Skins/Classic/Images/EmotIcons/Blink.gif',
 			point: 754
 		},{
 			id: 2,
 			name: 'Tuyết',
 			joinDate: '01-01-2014',
+			avatar: 'http://m.essentialbaby.com.au/forums/public/style_emoticons/default/biggrin.png',
 			point: 812
 		},{
 			id: 3,
 			name: 'Tuyến',
 			joinDate: '01-01-2014',
+			avatar: 'http://www.essentialbaby.com.au/forums/style_emoticons/default/glare.gif',
 			point: 813
 		},{
 			id: 4,
 			name: 'Thảo',
 			joinDate: '01-01-2014',
+			avatar: 'http://community.babycenter.com/js/tinymce_3_5_6/plugins/smileys/img/smiley-yell.gif',
 			point: 566
 		},{
 			id: 5,
 			name: 'Long',
 			joinDate: '01-01-2014',
+			avatar: 'http://community.babycenter.com/js/tinymce_3_2_5/plugins/smileys/img/smiley-cool.gif',
 			point: 235
 		}
 	];
@@ -185,31 +190,36 @@ ServicesModule.factory('Answers', function() {
 				'date': '22-04-2014',
 				'userID': 1,
 				'content': 'Bật điều hòa lên!',
-				'point': 10
+				'point': 3,
+				'ratedBy': [2,3,4]
 			},{
 				'id': 2,
 				'date': '22-04-2014',
 				'userID': 2,
 				'content': 'Đi tắm đi!',
-				'point': 10
+				'point': 2,
+				'ratedBy': [2,3]
 			},{
 				'id': 3,
 				'date': '22-04-2014',
 				'userID': 3,
 				'content': 'Cởi đồ ra!',
-				'point': 8
+				'point': 0,
+				'ratedBy': [2,3]
 			},{
 				'id': 4,
 				'date': '22-04-2014',
 				'userID': 4,
 				'content': 'Mở máy quạt!',
-				'point': 5
+				'point': 4,
+				'ratedBy': [2,3,4,5]
 			},{
 				'id': 5,
 				'date': '22-04-2014',
 				'userID': 5,
 				'content': 'Tui không biết!',
-				'point': -6
+				'point': -2,
+				'ratedBy': [2,3]
 			}
 		],
 		2:[
@@ -218,31 +228,36 @@ ServicesModule.factory('Answers', function() {
 				'date': '22-04-2014',
 				'userID': 1,
 				'content': 'Tui không biết!',
-				'point': 10
+				'point': 10,
+				'ratedBy': []
 			},{
 				'id': 7,
 				'date': '22-04-2014',
 				'userID': 2,
 				'content': 'Tui không biết!',
-				'point': 10
+				'point': 10,
+				'ratedBy': []
 			},{
 				'id': 8,
 				'date': '22-04-2014',
 				'userID': 3,
 				'content': 'Tui không biết!',
-				'point': 8
+				'point': 8,
+				'ratedBy': []
 			},{
 				'id': 9,
 				'date': '22-04-2014',
 				'userID': 4,
 				'content': 'Tui không biết!',
-				'point': 5
+				'point': 5,
+				'ratedBy': []
 			},{
 				'id': 10,
 				'date': '22-04-2014',
 				'userID': 5,
 				'content': 'Tui không biết!',
-				'point': -6
+				'point': -6,
+				'ratedBy': []
 			}
 		],
 		3:[
@@ -251,31 +266,36 @@ ServicesModule.factory('Answers', function() {
 				'date': '22-04-2014',
 				'userID': 1,
 				'content': 'Tui không biết!',
-				'point': 10
+				'point': 10,
+				'ratedBy': []
 			},{
 				'id': 12,
 				'date': '22-04-2014',
 				'userID': 2,
 				'content': 'Tui không biết!',
-				'point': 10
+				'point': 10,
+				'ratedBy': []
 			},{
 				'id': 13,
 				'date': '22-04-2014',
 				'userID': 3,
 				'content': 'Tui không biết!',
-				'point': 8
+				'point': 8,
+				'ratedBy': []
 			},{
 				'id': 14,
 				'date': '22-04-2014',
 				'userID': 4,
 				'content': 'Tui không biết!',
-				'point': 5
+				'point': 5,
+				'ratedBy': []
 			},{
 				'id': 15,
 				'date': '22-04-2014',
 				'userID': 5,
 				'content': 'Tui không biết!',
-				'point': -6
+				'point': -6,
+				'ratedBy': []
 			}
 		]
 	};
@@ -294,6 +314,14 @@ ServicesModule.factory('Answers', function() {
 		},
 		getAnswersLengthByQuestionId: function(id) {
 			return data[id] == undefined ? 0 : data[id].length;
+		},
+		rateAnswer: function (questionId, answerId, point, currentUserId) {
+			var answer = _.find(data[questionId],function(rw){ return rw.id == answerId });
+			
+			if ( answer.ratedBy.indexOf(currentUserId) < 0 ) {
+				answer.ratedBy.push(currentUserId);
+				answer.point += point;
+			}
 		},
 		insertAnswer: function (questionId,answer) {
 			
