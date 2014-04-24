@@ -62,8 +62,13 @@ QuestionControllers.controller('AnswerItemController', function ($scope, Answers
 	$scope.answer = Answers.getAnswerById($scope.questionId, $scope.answer.id);
 	$scope.answerUser = Users.getUserById($scope.answer.userID);
 	
+	$scope.rateAvai = ($scope.answer.userID == currentUserId || $scope.answer.ratedBy.indexOf(currentUserId) > 0) ? 0 : 1;
+	
 	$scope.rate = function (point) {
-		Answers.rateAnswer($scope.questionId,$scope.answer.id,point,currentUserId);
+		if ( $scope.rateAvai ) {
+			Answers.rateAnswer($scope.questionId,$scope.answer.id,point,currentUserId);
+		}
+		return false;
 	};
 });
 
@@ -71,6 +76,7 @@ QuestionControllers.controller('QuestionDetailsController', function($scope, Que
 	$scope.questionId = $routeParams.id;
 	$scope.question = Questions.getQuestionDetail($scope.questionId);
 	$scope.questionOwner = Users.getUserById($scope.question.userID);
+	$scope.currentUserId = currentUserId;
 	
 	$scope.answersForThis = Answers.getAnswersByQuestionId($scope.questionId);
 });

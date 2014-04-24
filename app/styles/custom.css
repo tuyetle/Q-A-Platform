@@ -37,6 +37,9 @@ h1 a:hover {
 #questionPage .author span{color:#444;font-size:11px;line-height:20px}
 #questionPage .date{text-align:right;color:#999;font-size:11px;line-height:20px}
 #questionPage .answer-content{font-size:12px;padding-bottom:20px;min-height:55px}
+#questionPage .disabled .like,
+#questionPage .disabled .dislike{opacity:0.3}
+
 #commentArea{padding:20px 0}
 
 .featured-question-carousel {

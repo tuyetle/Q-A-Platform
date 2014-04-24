@@ -34,9 +34,8 @@
 	<br />
 
 	<div id="answersArea" class="media-list">
-		<div class="answer clearfix media" ng-controller="AnswerItemController" ng-repeat="answer in answersForThis | orderBy:'point':true" data-id="{{ answer.id }}" >
-			
-			<div class="pull-left">
+		<div class="answer clearfix media" ng-controller="AnswerItemController" ng-repeat="answer in answersForThis | orderBy:'point':true" data-id="{{ answer.id }}">
+			<div class="pull-left" ng-class="{disabled: !rateAvai}">
 				<div ng-click="rate(1)" class="like"></div>
 				<div class="point" ng-class="{danger: answer.point < 0}">{{ answer.point }}</div>
 				<div ng-click="rate(-1)" class="dislike"></div>
