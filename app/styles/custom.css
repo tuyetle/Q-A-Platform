@@ -50,7 +50,8 @@ h1 a:hover {
 .category-container {
 	position: fixed;
 	top: 91px;
-	margin-left: -15px;
+	left: 50%;
+	margin-left: -599px;
 }
 .category-container .category-list-sidebar {
 	width: 195px;
