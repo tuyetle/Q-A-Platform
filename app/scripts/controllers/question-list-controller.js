@@ -75,17 +75,19 @@ QuestionControllers.controller('QuestionDetailsController', function($scope, Que
 QuestionControllers.controller('AddAnswerController', function($scope, Answers, Users, $routeParams) {
 
 	$scope.questionId = $routeParams.id;
-	$scope.newAnswer = {
-		'id': null,
-		'date': null,
-		'userID': Users.getCurrentUser().id,
-		'content': null,
-		'point': 0
-	};
-
+	$scope.newAnswerContent = null;
+	
 	$scope.addAnswer = function () {
+		$scope.newAnswer = {
+			'id': null,
+			'date': null,
+			'userID': Users.getCurrentUser().id,
+			'content': null,
+			'point': 0
+		};
 		var today = new Date();
 		$scope.newAnswer.date = today;
+		$scope.newAnswer.content = $scope.newAnswerContent;
 		Answers.insertAnswer($scope.questionId, $scope.newAnswer);
 	};
 

@@ -162,16 +162,16 @@ ServicesModule.factory('Questions',function() {
 
 ServicesModule.factory('Categories', function() {
 	var data = {
-        	'01': {'id': '01', 'name': 'Arts & Humanities'}, 
-        	'02': {'id': '02', 'name': 'Beauty & Style'},
-        	'03': {'id': '03', 'name': 'Business & Finance'},
-        	'04': {'id': '04', 'name': 'Cars & Transportation'}, 
-        	'05': {'id': '05', 'name': 'Computers & Internet'},
-        	'06': {'id': '06', 'name': 'Dining Out'},
-        	'07': {'id': '07', 'name': 'Consumer Electronics'},
-        	'09': {'id': '09', 'name': 'Entertainment & Music'},
-        	'10': {'id': '10', 'name': 'Education & Reference'}
-       	};
+		1: {'id': 1, 'name': 'Arts & Humanities'}, 
+		2: {'id': 2, 'name': 'Beauty & Style'},
+		3: {'id': 3, 'name': 'Business & Finance'},
+		4: {'id': 4, 'name': 'Cars & Transportation'}, 
+		5: {'id': 5, 'name': 'Computers & Internet'},
+		6: {'id': 6, 'name': 'Dining Out'},
+		7: {'id': 7, 'name': 'Consumer Electronics'},
+		9: {'id': 9, 'name': 'Entertainment & Music'},
+		10: {'id': 10, 'name': 'Education & Reference'}
+	};
    	var Categories = {
    		query: function() {
    			return data;
