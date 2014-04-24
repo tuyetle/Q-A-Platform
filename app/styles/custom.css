@@ -39,7 +39,7 @@ h1 a:hover {
 #questionPage .disabled .like,
 #questionPage .disabled .dislike{opacity:0.3;cursor:default}
 
-#commentArea{padding:20px 0}
+#commentArea{padding:20px 0 0}
 
 .featured-question-carousel {
 	margin-bottom: 30px;
