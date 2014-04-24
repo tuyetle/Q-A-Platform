@@ -19,7 +19,6 @@ h1 a:hover {
 	margin-left: 0px !important;
 	margin-right: 10px;
 }
-<<<<<<< HEAD
 
 *{outline:none!important}
 
@@ -38,7 +37,7 @@ h1 a:hover {
 #questionPage .date{text-align:right;color:#999;font-size:11px;line-height:20px}
 #questionPage .answer-content{font-size:12px;padding-bottom:20px;min-height:55px}
 #questionPage .disabled .like,
-#questionPage .disabled .dislike{opacity:0.3}
+#questionPage .disabled .dislike{opacity:0.3;cursor:default}
 
 #commentArea{padding:20px 0}
 

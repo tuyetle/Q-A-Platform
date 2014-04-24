@@ -1,4 +1,4 @@
-var QuestionControllers = angular.module('QuestionControllers', ['services','filters']),
+var QuestionControllers = angular.module('QuestionControllers', ['services','filters','ngCookies']),
 	currentUserId = 5;
 
 QuestionControllers.controller('QuestionsListController', function($scope, Questions, Categories, $routeParams) {
@@ -57,31 +57,42 @@ QuestionControllers.controller('AskQuestionController', function($scope, Questio
 	}
 });
 
-QuestionControllers.controller('AnswerItemController', function ($scope, $filter, Answers, Users, $routeParams, $routeParams) {
-	$scope.questionId = $routeParams.id;
-	$scope.answer = Answers.getAnswerById($scope.questionId, $scope.answer.id);
-	$scope.answerUser = Users.getUserById($scope.answer.userID);
-	
-	$scope.rateAvai = ($scope.answer.userID == currentUserId || $scope.answer.ratedBy.indexOf(currentUserId) > 0) ? 0 : 1;
-	$scope.rate = function (point) {
-		if ( $scope.rateAvai ) {
-			Answers.rateAnswer($scope.questionId,$scope.answer.id,point,currentUserId);
-			$scope.answerUser.point+=point;
-			$scope.rateAvai = 0;
-		}
-		return false;
-	};
-});
-
+// QUESTION DETAIL
 QuestionControllers.controller('QuestionDetailsController', function($scope, $filter, Questions, Answers, Users, $routeParams) {
+	Questions.query();
+	Answers.query();
+	Users.query();
+	
 	$scope.questionId = $routeParams.id;
 	$scope.question = Questions.getQuestionDetail($scope.questionId);
 	$scope.questionOwner = Users.getUserById($scope.question.userID);
 	$scope.currentUserId = currentUserId;
 	
 	$scope.answersForThis = Answers.getAnswersByQuestionId($scope.questionId);
+
 });
 
+// ANSWER OF QUESTION DETAIL
+QuestionControllers.controller('AnswerItemController', function ($scope, $filter, Answers, Users, $routeParams) {
+	$scope.questionId = $routeParams.id;
+	$scope.answer = Answers.getAnswerById($scope.questionId, $scope.answer.id);
+	$scope.answerUser = Users.getUserById($scope.answer.userID);
+	
+	$scope.rateAvai = ($scope.answer.userID == currentUserId || $scope.answer.ratedBy.indexOf(currentUserId) > 0) ? 0 : 1;
+	
+	// LIKE OR DISLIKE ANSWER
+	$scope.rate = function (point) {
+		if ( $scope.rateAvai ) {
+			Answers.rateAnswer($scope.questionId,$scope.answer.id,point,currentUserId);
+			$scope.answerUser.point+=point;
+			$scope.rateAvai = 0;
+			Users.save();
+		}
+		return false;
+	};
+});
+
+// ADD YOUR ANSWER
 QuestionControllers.controller('AddAnswerController', function($scope, $filter, Answers, Users, $routeParams) {
 
 	$scope.questionId = $routeParams.id;
@@ -91,7 +102,7 @@ QuestionControllers.controller('AddAnswerController', function($scope, $filter, 
 		$scope.newAnswer = {
 			'id': null,
 			'date': null,
-			'userID': Users.getCurrentUser().id,
+			'userID': currentUserId,
 			'content': null,
 			'point': 0,
 			'ratedBy': []

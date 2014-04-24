@@ -1,6 +1,6 @@
-var ServicesModule = angular.module('services', []);
+var ServicesModule = angular.module('services', ['ngCookies']);
 
-ServicesModule.factory('Users',function () {
+ServicesModule.factory('Users',function ($cookieStore) {
 	var data = [
 		{
 			id: 1,
@@ -37,19 +37,22 @@ ServicesModule.factory('Users',function () {
 	
 	var Users = {
 		query: function () {
+			if ( $cookieStore.get(QAP.cookies.users) ) {
+				data = $cookieStore.get(QAP.cookies.users);
+			}
 			return data;
 		},
 		getUserById: function (id) {
 			return _.find(data,function(rw){ return rw.id == id });
 		},
-		getCurrentUser: function () {
-			return data[4];
+		save: function () {
+			$cookieStore.put(QAP.cookies.users,data);
 		}
 	};
 	return Users;
 });
 
-ServicesModule.factory('Questions',function() {
+ServicesModule.factory('Questions',function($cookieStore) {
 	var data = [{
 		id: 1,
 		title: 'Sao nóng quá vậy nè???',
@@ -124,11 +127,16 @@ ServicesModule.factory('Questions',function() {
 	
 	var Questions = {
 		query: function() {
+			if ( $cookieStore.get(QAP.cookies.questions) ) {
+				data = $cookieStore.get(QAP.cookies.questions);
+			}
 			return data;
 		},
 		askQuestion: function(question) {
 			_.extend(question, {id: data.length + 1, answers: 0});
-			return data.push(question); //return the length of data
+			var result = data.push(question);
+			//this.save();
+			return result; //return the length of data
 		},
 		queryByCategory: function(id){
 
@@ -148,6 +156,9 @@ ServicesModule.factory('Questions',function() {
 				}
    			};
    			return null;
+		},
+		save: function () {
+			$cookieStore.put(QAP.cookies.questions,data);
 		}
 	}
 	return Questions;
@@ -182,7 +193,7 @@ ServicesModule.factory('Categories', function() {
 	return Categories;
 });
 
-ServicesModule.factory('Answers', function() {
+ServicesModule.factory('Answers', function($cookieStore) {
 	var data = {
 		1:[
 			{
@@ -301,6 +312,9 @@ ServicesModule.factory('Answers', function() {
 	};
 	var Answers = {
 		query: function() {
+			if ( $cookieStore.get(QAP.cookies.answers) ) {
+				data = $cookieStore.get(QAP.cookies.answers);
+			}
 			return data;
 		},
 		getAnswerById: function(questionId, answerId) {
@@ -321,6 +335,7 @@ ServicesModule.factory('Answers', function() {
 				answer.ratedBy.push(currentUserId);
 				answer.point += point;
 			}
+			this.save();
 			return false;
 		},
 		insertAnswer: function (questionId,answer) {
@@ -330,8 +345,13 @@ ServicesModule.factory('Answers', function() {
 				answerLength += data[obj].length;
 			}
 			_.extend(answer, {id: answerLength + 1});
-			return data[questionId].push(answer);
-		
+			
+			var result = data[questionId].push(answer);
+			this.save();
+			return result;
+		},
+		save: function () {
+			$cookieStore.put(QAP.cookies.answers,data);
 		}
 	};
 	return Answers;

@@ -1,4 +1,4 @@
-<div ng-show="showCarousel" id="carousel-example-generic" class="carousel slide featured-question-carousel" data-ride="carousel">
+<div data-ng:show="showCarousel" id="carousel-example-generic" class="carousel slide featured-question-carousel" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -50,11 +50,11 @@
 <div class="panel panel-default">
 	<div class="panel-heading clearfix">
 		<ul class="nav nav-pills pull-left">
-			<li ng-class="{active: sortOption.predicate=='title'}">
-				<a href="" ng-click="changePredicate('alphabet')" title="Alphabet">Alphabet</a>
+			<li data-ng:class="{active: sortOption.predicate=='title'}">
+				<a href="" data-ng:click="changePredicate('alphabet')" title="Alphabet">Alphabet</a>
 			</li>
-			<li ng-class="{active: sortOption.predicate=='anwsers'}">
-				<a href="" ng-click="changePredicate('popular')" title="Popular">Popular</a>
+			<li data-ng:class="{active: sortOption.predicate=='anwsers'}">
+				<a href="" data-ng:click="changePredicate('popular')" title="Popular">Popular</a>
 			</li>
 		</ul>
 		<ul class="pagination pull-right">
@@ -83,11 +83,11 @@
 
 	</div>
 	<ul class="list-group">
-		<li ng-controller="QuestionsListItemController" ng-repeat="question in questions | orderBy: sortOption.predicate : sortOption.reverse" class="list-group-item">
+		<li data-ng:controller="QuestionsListItemController" data-ng:repeat="question in questions | orderBy: sortOption.predicate : sortOption.reverse" class="list-group-item">
 			<blockquote>
 				<a href="#/q-details/{{question.id}}" title="{{question.title}}">{{question.title}}</a>
 			</blockquote>
-			<p ng-show="question.description.length >
+			<p data-ng:show="question.description.length >
 				0">
 		        {{question.description}}
 			</p>
@@ -99,13 +99,13 @@
 					</small>
 				</p>
 				<p class="pull-right">
-					<span ng-class="statusLabelClass" class="label">{{answersLength}} anwsers
+					<span data-ng:class="statusLabelClass" class="label">{{answersLength}} anwsers
 					</span>
 				</p>
 			</div>
 			<p class="categories clearfix">
 				Tags:
-				<a href="#/category/{{category.id}}" title="{{ category.name }}" ng-repeat="category in categories" class="label label-warning">{{ category.name }}</a>
+				<a href="#/category/{{category.id}}" title="{{ category.name }}" data-ng:repeat="category in categories" class="label label-warning">{{ category.name }}</a>
 			</p>
 		</li>
 	</ul>

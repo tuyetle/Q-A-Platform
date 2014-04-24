@@ -1,4 +1,4 @@
-var QAP = angular.module('QAP', ['QuestionControllers']);
+var QAP = angular.module('QAP', ['QuestionControllers','ngCookies']);
 
 function QAPRouteConfig($routeProvider) {
 	$routeProvider
@@ -25,10 +25,23 @@ function QAPRouteConfig($routeProvider) {
 
 QAP.config(QAPRouteConfig);
 
-QAP.controller('MainController', function ($scope, $location) {
+QAP.cookies = {
+	'answers': 'answers',
+	'users': 'users',
+	'questions': 'questions'
+};
+
+QAP.controller('MainController', function ($scope, $location, $cookieStore) {
 	$scope.askQuestionPath = '#/ask-question';
 	$scope.$location = $location;
 	$scope.locationPath = $location.path();
+	
+	// CLEAR ALL COOKIES
+	$scope.clearCookies = function () {
+		for(var cookie in QAP.cookies) {
+			$cookieStore.remove(cookie);
+		}
+	};
 });
 
 QAP.controller('CategoriesListController', function ($scope, Categories) {

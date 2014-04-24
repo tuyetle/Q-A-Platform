@@ -9,30 +9,30 @@
 			<div class="detail">{{ question.description }}</div>
 			
 			<br>
-			<div class="date pull-right">asked  {{ question.date | date:'dd-MM-yyyy hh:mm' }}</div>
+			<div class="date pull-right">asked  {{ question.date | smartDateTime }}</div>
 			<div class="author pull-left"><img src="{{questionOwner.avatar}}" alt="" width="20" height="20"><strong>{{ questionOwner.name }}</strong> <span>{{ questionOwner.point }}</span></div>
 		</div>
 	</div><!--/questionDetail-->
 
-	<fieldset id="commentArea" ng-controller="AddAnswerController">
+	<fieldset id="commentArea" data-ng:controller="AddAnswerController">
 		<div class="form-group">
 			<label>Your Answer</label>
-			<textarea class="form-control" rows="3" ng-model="newAnswerContent"></textarea>
+			<textarea class="form-control" rows="3" data-ng:model="newAnswerContent"></textarea>
 		</div>
 		<div class="form-group">
-			<button ng-click="addAnswer()" class="btn btn-primary">Send Answer</button>
-			<button ng-click="resetAnswer()" class="btn btn-primary">Reset</button>
+			<button data-ng:click="addAnswer()" class="btn btn-primary">Send Answer</button>
+			<button data-ng:click="resetAnswer()" class="btn btn-primary">Reset</button>
 		</div>
 	</fieldset><!--/commentArea-->
 
 	<br />
 
 	<div id="answersArea" class="media-list">
-		<div class="answer clearfix media" ng-controller="AnswerItemController" ng-repeat="answer in answersForThis | orderBy:'point':true" data-id="{{ answer.id }}">
-			<div class="pull-left" ng-class="{disabled: !rateAvai}">
-				<div ng-click="rate(1)" class="like"></div>
-				<div class="point" ng-class="{danger: answer.point < 0}">{{ answer.point }}</div>
-				<div ng-click="rate(-1)" class="dislike"></div>
+		<div class="answer clearfix media" data-ng:controller="AnswerItemController" data-ng:repeat="answer in answersForThis | orderBy:['-point','-date']" data-id="{{ answer.id }}">
+			<div class="pull-left" data-ng:class="{disabled: !rateAvai}">
+				<div data-ng:click="rate(1)" class="like"></div>
+				<div class="point" data-ng:class="{danger: answer.point < 0}">{{ answer.point }}</div>
+				<div data-ng:click="rate(-1)" class="dislike"></div>
 			</div>
 			
 			<div class="media-body">

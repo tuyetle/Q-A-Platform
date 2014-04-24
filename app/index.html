@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="QAP">
+<html lang="en" data-ng-app="QAP">
 <head>
 	<meta charset="UTF-8">
 	<title>Q&A Platform</title>
@@ -9,6 +9,7 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 	<script type="text/javascript" src="scripts/vendors/bootstrap.min.js"></script>
 	<script type="text/javascript" src="scripts/vendors/underscore-min.js"></script>
+	<script type="text/javascript" src="scripts/cookies.js"></script>
 	<script type="text/javascript" src="scripts/directives.js"></script>
 	<script type="text/javascript" src="scripts/filters.js"></script>
 	<script type="text/javascript" src="scripts/services.js"></script>
@@ -17,7 +18,7 @@
 </head>
 <body>
 
-	<div class="container" ng-controller="MainController">
+	<div class="container" data-ng:controller="MainController">
 <!-- 		<div class="row">
 			<div class="col-xs-2">
 				<a href="#/"><img src="images/logo.jpg" width="150" alt="Q&A" class="img-rounded"></a>
@@ -41,6 +42,8 @@
 					Q&A Platform
 		   		</a></h1>
 		   	</div>
+			
+			<div class="pull-right"><br><button class="btn btn-danger" data-ng:click="clearCookies()">Clear all Cookies</button></div>
 		  </div>
 		</nav>
 		
@@ -52,20 +55,20 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-2">
-				<ul class="nav nav-pills nav-stacked" ng-controller="CategoriesListController">
-					<li ng-class="{active: selectedCategory=='-1'}">
-						<a href="#/" ng-click="selectCategory('-1')" >All Categories</a>
+				<ul class="nav nav-pills nav-stacked" data-ng:controller="CategoriesListController">
+					<li data-ng:class="{active: selectedCategory=='-1'}">
+						<a href="#/" data-ng:click="selectCategory('-1')" >All Categories</a>
 					</li>
-				  <li ng-controller="CategoryListItemController" ng-repeat="category in categoryList" ng-class="{active: category.id==selectedCategory}"> 
-				   	<a ng-click="selectCategory(category.id)" title="{{category.name}}" href="#/category/{{category.id}}">{{category.name}} <span class="badge badge-primary">{{questionLength}}</span></a>
+				  <li data-ng:controller="CategoryListItemController" data-ng:repeat="category in categoryList" data-ng:class="{active: category.id==selectedCategory}"> 
+				   	<a data-ng:click="selectCategory(category.id)" title="{{category.name}}" href="#/category/{{category.id}}">{{category.name}} <span class="badge badge-primary">{{questionLength}}</span></a>
 				  </li>
 				</ul>
 			</div>
-			<div class="col-xs-7" ng-view>
+			<div class="col-xs-7" data-ng:view>
 
 			</div>
 			<div class="col-xs-3">
-				 <a ng-href="{{askQuestionPath}}" title="Ask a question" class="btn btn-lg btn-danger btn-block"> Ask a question <span class="glyphicon glyphicon-question-sign"></span></a>
+				 <a data-ng:href="{{askQuestionPath}}" title="Ask a question" class="btn btn-lg btn-danger btn-block"> Ask a question <span class="glyphicon glyphicon-question-sign"></span></a>
 			</div>
 		</div>
 	</div>
