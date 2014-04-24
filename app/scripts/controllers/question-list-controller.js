@@ -1,5 +1,5 @@
 var QuestionControllers = angular.module('QuestionControllers', ['services']),
-	currentUserId = 4;
+	currentUserId = 5;
 
 QuestionControllers.controller('QuestionsListController', function($scope, Questions, Categories, $routeParams) {
 	$scope.showCarousel = true;

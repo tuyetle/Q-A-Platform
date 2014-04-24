@@ -317,8 +317,7 @@ ServicesModule.factory('Answers', function() {
 		},
 		rateAnswer: function (questionId, answerId, point, currentUserId) {
 			var answer = _.find(data[questionId],function(rw){ return rw.id == answerId });
-			
-			if ( answer.ratedBy.indexOf(currentUserId) < 0 ) {
+			if ( answer.ratedBy.indexOf(currentUserId) < 0 && answer.userID != currentUserId ) {
 				answer.ratedBy.push(currentUserId);
 				answer.point += point;
 			}
