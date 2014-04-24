@@ -33,13 +33,23 @@ h1 a:hover {
 #questionPage .point.danger{color:red}
 #questionPage .author  *{vertical-align:middle}
 #questionPage .author strong{color:#4a6b82;font-size:11px;line-height:20px;margin:0 0 0 3px}
-#questionPage .author span{color:#444;font-size:11px;line-height:20px}
+#questionPage .author span{color:#777;font-size:11px;line-height:20px}
 #questionPage .date{text-align:right;color:#999;font-size:11px;line-height:20px}
 #questionPage .answer-content{font-size:12px;padding-bottom:20px;min-height:55px}
 #questionPage .disabled .like,
 #questionPage .disabled .dislike{opacity:0.3;cursor:default}
 #questionPage .tags{padding:20px 0}
 #questionPage .tags * + *{margin-left:5px}
+
+.question-list .name{color:green;margin-left:5px;vertical-align:middle}
+.question-list .author  *{vertical-align:middle}
+.question-list .author strong{color:#4a6b82;font-size:11px;line-height:20px;margin:0 0 0 3px}
+.question-list .author span{color:#777;font-size:11px;line-height:20px}
+.question-list .date{text-align:right;color:#999;font-size:11px;line-height:20px}
+.question-list .desc{font-size:12px;padding-bottom:20px;min-height:55px}
+.question-list .categories{padding:15px 0 5px}
+.question-list .tags{overflow:hidden}
+
 
 #commentArea{padding:20px 0 0}
 

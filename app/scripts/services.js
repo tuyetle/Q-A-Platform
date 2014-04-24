@@ -135,7 +135,7 @@ ServicesModule.factory('Questions',function($cookieStore) {
 		askQuestion: function(question) {
 			_.extend(question, {id: data.length + 1, answers: 0});
 			var result = data.push(question);
-			//this.save();
+			this.save();
 			return result; //return the length of data
 		},
 		queryByCategory: function(id){
