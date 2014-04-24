@@ -31,7 +31,7 @@ QAP.cookies = {
 	'questions': 'questions'
 };
 
-QAP.controller('MainController', function ($scope, $location, $cookieStore) {
+QAP.controller('MainController', function ($scope, $location, $cookieStore, Questions, Answers, Users) {
 	$scope.askQuestionPath = '#/ask-question';
 	$scope.$location = $location;
 	$scope.locationPath = $location.path();
@@ -42,6 +42,11 @@ QAP.controller('MainController', function ($scope, $location, $cookieStore) {
 			$cookieStore.remove(cookie);
 		}
 	};
+	
+	// LOAD COOKIES
+	Questions.query();
+	Answers.query();
+	Users.query();
 });
 
 QAP.controller('CategoriesListController', function ($scope, Categories) {

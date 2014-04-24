@@ -7,8 +7,7 @@
 		<div class="media-body">
 			<h1 class="media-heading">{{ question.title }}</h1>
 			<div class="detail">{{ question.description }}</div>
-			
-			<br>
+			<div class="tags"><a href="#/category/{{category.id}}" title="{{ category.name }}" class="label label-info" data-ng:repeat="category in categories">{{ category.name }}</a></div>
 			<div class="date pull-right">asked  {{ question.date | smartDateTime }}</div>
 			<div class="author pull-left"><img src="{{questionOwner.avatar}}" alt="" width="20" height="20"><strong>{{ questionOwner.name }}</strong> <span>{{ questionOwner.point }}</span></div>
 		</div>
