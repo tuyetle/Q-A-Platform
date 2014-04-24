@@ -25,14 +25,23 @@ function QAPRouteConfig($routeProvider) {
 
 QAP.config(QAPRouteConfig);
 
+QAP.controller('MainController', function ($scope, $location) {
+	$scope.askQuestionPath = '#/ask-question';
+	$scope.$location = $location;
+	$scope.locationPath = $location.path();
+});
+
 QAP.controller('CategoriesListController', function ($scope, Categories) {
-        // Category
-        $scope.categoryList = Categories.query();
+    // Category
+    $scope.categoryList = Categories.query();
 
-       	$scope.selectedCategory = '01';
+   	$scope.selectedCategory = '-1';
 
-       	$scope.selectCategory = function(categoryId){
-			$scope.selectedCategory = categoryId;		
-       	}
-
+   	$scope.selectCategory = function(id) {
+   		$scope.selectedCategory = id;
+   	}
  });
+
+QAP.controller('CategoryListItemController', function ($scope, Questions) {
+	$scope.questionLength = Questions.getQuestionLengthByCategory($scope.category.id);
+});

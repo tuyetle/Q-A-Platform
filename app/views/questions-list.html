@@ -1,21 +1,91 @@
-<div class="panel panel-primary">
-	<div class="panel-heading">
-	    <h3 class="panel-title"><a href="#">Recent</a><a href="#">Popular</a></h3>
-	 </div>
-	<div class="panel-body">
-		
+<div ng-show="showCarousel" id="carousel-example-generic" class="carousel slide featured-question-carousel" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item active">
+        <div class="jumbotron">
+		  <h1>Hello, world!</h1>
+		  <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+		  <p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+		</div>
+    </div>
+    <div class="item">
+      <div class="jumbotron">
+		  <h1>Hello, world!</h1>
+		  <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+		  <p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+		</div>
+    </div>
+    <div class="item">
+      <div class="jumbotron">
+		  <h1>Hello, world!</h1>
+		  <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+		  <p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+		</div>
+    </div>
+    <div class="item">
+      <div class="jumbotron">
+		  <h1>Hello, world!</h1>
+		  <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+		  <p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+		</div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+</div>
+<div class="panel panel-default">
+	<div class="panel-heading clearfix">
+		<ul class="nav nav-pills pull-left">
+			<li ng-class="{active: sortOption.predicate=='title'}">
+				<a href="" ng-click="changePredicate('alphabet')" title="Alphabet">Alphabet</a>
+			</li>
+			<li ng-class="{active: sortOption.predicate=='anwsers'}">
+				<a href="" ng-click="changePredicate('popular')" title="Popular">Popular</a>
+			</li>
+		</ul>
+
 	</div>
 	<ul class="list-group">
-		<li ng-repeat="question in questions" class="list-group-item">						
-			<blockquote><a href="#/q-details/{{question.id}}">{{question.title}}</a></blockquote>
-			<p ng-show="question.description.length > 0">
+		<li ng-controller="QuestionsListItemController" ng-repeat="question in questions | orderBy: sortOption.predicate : sortOption.reverse" class="list-group-item">
+			<blockquote>
+				<a href="#/q-details/{{question.id}}" title="{{question.title}}">{{question.title}}</a>
+			</blockquote>
+			<p ng-show="question.description.length >
+				0">
 		        {{question.description}}
-		    </p>
-			<span class="glyphicon glyphicon-user"> {{question.user}}</span>
-			<span class="glyphicon glyphicon-calendar pull-right"> {{question.date}}</span><br />
-			<span class="label label-success"> {{question.anwsers}} anwsers</span>
-			<p><span ng-repeat="category in question.categoryIDs">{{ category }}</span></p>
-		</li>	
+			</p>
+			<div class="clearfix">
+				<p class="pull-left">
+					<small>
+						Asked by <b><i>{{question.user}}</i></b> 
+						in <b>{{question.date | date: 'medium'}}</b>
+					</small>
+				</p>
+				<p class="pull-right">
+					<span ng-class="statusLabelClass" class="label">{{answersLength}} anwsers
+					</span>
+				</p>
+			</div>
+			<p class="categories clearfix">
+				Tags:
+				<a href="#/category/{{category.id}}" title="{{ category.name }}" ng-repeat="category in categories" class="label label-warning">{{ category.name }}</a>
+			</p>
+		</li>
 	</ul>
-  <div class="panel-footer">Panel footer</div>
+	<div class="panel-footer">
+	</div>
 </div>
