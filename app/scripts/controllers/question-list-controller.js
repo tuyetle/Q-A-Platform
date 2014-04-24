@@ -110,7 +110,14 @@ QuestionControllers.controller('AddAnswerController', function($scope, $filter, 
 		var currentDate = $filter('date')(new Date(), 'yyyy-MM-ddThh:mm:ssZ');
 		$scope.newAnswer.date = currentDate;
 		$scope.newAnswer.content = $scope.newAnswerContent;
+		$scope.newAnswerContent = '';
 		Answers.insertAnswer($scope.questionId, $scope.newAnswer);
+		return false;
+	};
+	
+	$scope.resetAnswer = function () {
+		$scope.newAnswerContent = '';
+		return false;
 	};
 
 });
