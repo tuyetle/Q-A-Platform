@@ -7,3 +7,5 @@
 
 // }
 // });
+
+var Directives = angular.module('directives', []);
