@@ -48,14 +48,12 @@ ServicesModule.factory('Users',function () {
 ServicesModule.factory('Questions',function() {
 	var data = [{
 		id: 1,
-
 		title: 'Sao lạnh quá vậy nè???',
 		description: "Trời lạnh quá là nóng phải làm sao đây?",
 		user: "Long",
 		userID: 1,
 		featured: true,
 		date: '20-04-2014',
-
 		categoryIDs: [1]
 	}, {
 		id: 2,
@@ -65,7 +63,6 @@ ServicesModule.factory('Questions',function() {
 		userID: 2,
 		featured: false,
 		date: '20-04-2014',
-
 		categoryIDs: [1,10]
 	}, {
 		id: 3,
@@ -75,7 +72,6 @@ ServicesModule.factory('Questions',function() {
 		userID: 3,
 		featured: true,
 		date: '20-04-2014',
-
 		categoryIDs: [1]
 	}, {
 		id: 4,
@@ -83,9 +79,8 @@ ServicesModule.factory('Questions',function() {
 		description: 'Almost all others country are already available, but Germany and Austria still not. I dont understand why...:-(',
 		user: "Jaloslav",
 		userID: 4,
-		featured: true,
+		featured: false,
 		date: '20-04-2014',
-
 		categoryIDs: [5]
 	}, {
 		id: 5,
@@ -95,7 +90,6 @@ ServicesModule.factory('Questions',function() {
 		userID: 5,
 		featured: false,
 		date: '20-04-2014',
-
 		categoryIDs: [5]
 	}, {
 		id: 6,
@@ -105,7 +99,6 @@ ServicesModule.factory('Questions',function() {
 		userID: 1,
 		featured: true,
 		date: '20-04-2014',
-
 		categoryIDs: [5,10]
 	}, {
 		id: 7,
@@ -123,7 +116,6 @@ ServicesModule.factory('Questions',function() {
 		user: "Nicky",
 		userID: 3,
 		date: '20-04-2014',
-
 		featured: true,
 		categoryIDs: [09]
 	}, {
@@ -134,7 +126,6 @@ ServicesModule.factory('Questions',function() {
 		userID: 4,
 		featured: false,
 		date: '20-04-2014',
-
 		categoryIDs: [1]
 	}, {
 		id: 10,
@@ -161,7 +152,7 @@ ServicesModule.factory('Questions',function() {
 		description: 'She\'s so sexy',
 		user: "Psycho",
 		userID: 4,
-		featured: true,
+		featured: false,
 		date: '20-04-2014',
 		categoryIDs: [2, 6]
 	}
