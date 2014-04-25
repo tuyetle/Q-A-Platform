@@ -1,4 +1,4 @@
-var QuestionControllers = angular.module('QuestionControllers', ['services','filters','ngCookies']);
+var QuestionControllers = angular.module('QAP.QuestionControllers', ['QAP.services','QAP.filters','ngCookies']);
 
 // RENDER QUESTION LIST
 QuestionControllers.controller('QuestionsListController', function($scope, Questions, Categories, $routeParams) {
@@ -15,7 +15,9 @@ QuestionControllers.controller('QuestionsListController', function($scope, Quest
 	} else {
 		$scope.questions = Questions.query();
 	}
-	
+
+	$scope.featuredQuestions = Questions.getFeaturedQuestions();
+
 	$scope.changePredicate = function(newPredicate) {
 		switch(newPredicate) {
 			case 'popular':
