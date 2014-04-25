@@ -59,7 +59,7 @@ ServicesModule.factory('Questions',function($cookieStore) {
 		description: "Trời nóng quá là nóng phải làm sao đây?",
 		userID: 1,
 		date: '2014-04-20T10:50:00+0700',
-		categoryIDs: [1]
+		categoryIDs: [1,2]
 	}, {
 		id: 2,
 		title: 'Why international public opinion did not support the Hungarian Revolution of 1956?',
@@ -166,15 +166,15 @@ ServicesModule.factory('Questions',function($cookieStore) {
 
 ServicesModule.factory('Categories', function($cookieStore) {
 	var data = {
-		1: {'id': 1, 'name': 'Arts & Humanities', 'total': 10}, 
-		2: {'id': 2, 'name': 'Beauty & Style', 'total': 6},
-		3: {'id': 3, 'name': 'Business & Finance', 'total': 5},
-		4: {'id': 4, 'name': 'Cars & Transportation', 'total': 9}, 
-		5: {'id': 5, 'name': 'Computers & Internet', 'total': 5},
-		6: {'id': 6, 'name': 'Dining Out', 'total': 6},
-		7: {'id': 7, 'name': 'Consumer Electronics', 'total': 8},
-		9: {'id': 9, 'name': 'Entertainment & Music', 'total': 12},
-		10: {'id': 10, 'name': 'Education & Reference', 'total': 8}
+		1: {'id': 1, 'name': 'Arts & Humanities', 'total': 4}, 
+		2: {'id': 2, 'name': 'Beauty & Style', 'total': 1},
+		3: {'id': 3, 'name': 'Business & Finance', 'total': 0},
+		4: {'id': 4, 'name': 'Cars & Transportation', 'total': 0}, 
+		5: {'id': 5, 'name': 'Computers & Internet', 'total': 4},
+		6: {'id': 6, 'name': 'Dining Out', 'total': 0},
+		7: {'id': 7, 'name': 'Consumer Electronics', 'total': 0},
+		9: {'id': 9, 'name': 'Entertainment & Music', 'total': 3},
+		10: {'id': 10, 'name': 'Education & Reference', 'total': 3}
 	};
    	var Categories = {
    		query: function() {
