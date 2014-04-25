@@ -9,9 +9,9 @@
     <div ng-repeat="question in featuredQuestions" class="item" ng-class="
     {active: $index == 0}">
         <div class="jumbotron">
-		  <h2 >{{question.title | trunCate:16 }}</h2>
+		  <h2 >{{question.title | trunCate:15 }}</h2>
 		  <p class="description">{{question.description | trunCate:25 }}</p>
-		  <p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+		  <p><a href="#/q-details/{{question.id}}" class="btn btn-primary btn-lg" role="button">Learn more</a></p>
 		</div>
     </div>
   </div>
