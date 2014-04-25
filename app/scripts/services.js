@@ -54,7 +54,7 @@ ServicesModule.factory('Questions',function() {
 		userID: 1,
 		featured: true,
 		date: '20-04-2014',
-		categoryIDs: ['01']
+		categoryIDs: [1]
 	}, {
 		id: 2,
 		title: 'Why international public opinion did not support the Hungarian Revolution of 1956?',
@@ -63,7 +63,7 @@ ServicesModule.factory('Questions',function() {
 		userID: 2,
 		featured: false,
 		date: '20-04-2014',
-		categoryIDs: ['01','10']
+		categoryIDs: [1,10]
 	}, {
 		id: 3,
 		title: 'How long do you think it would take the average person to be able to learn to draw from a living?',
@@ -72,16 +72,16 @@ ServicesModule.factory('Questions',function() {
 		userID: 3,
 		featured: true,
 		date: '20-04-2014',
-		categoryIDs: ['01']
+		categoryIDs: [1]
 	}, {
 		id: 4,
 		title: 'When will be Germany and Austria available in Google Street View?',
 		description: 'Almost all others country are already available, but Germany and Austria still not. I dont understand why...:-(',
 		user: "Jaloslav",
 		userID: 4,
-		featured: true,
+		featured: false,
 		date: '20-04-2014',
-		categoryIDs: ['05']
+		categoryIDs: [5]
 	}, {
 		id: 5,
 		title: 'Download flappy bird?',
@@ -90,7 +90,7 @@ ServicesModule.factory('Questions',function() {
 		userID: 5,
 		featured: false,
 		date: '20-04-2014',
-		categoryIDs: ['05']
+		categoryIDs: [5]
 	}, {
 		id: 6,
 		title: 'How to fix dissapeared text and folders in window 7?',
@@ -99,7 +99,7 @@ ServicesModule.factory('Questions',function() {
 		userID: 1,
 		featured: true,
 		date: '20-04-2014',
-		categoryIDs: ['05','10']
+		categoryIDs: [5,10]
 	}, {
 		id: 7,
 		title: 'What are your top ten Disney movies?',
@@ -108,16 +108,16 @@ ServicesModule.factory('Questions',function() {
 		userID: 2,
 		featured: false,
 		date: '20-04-2014',
-		categoryIDs: ['09']
-	}, {
-		id: 8,
+		categoryIDs: [09]
+	}, 
+		{id: 8,
 		title: 'Why do we lose our interest for a song?',
 		description: 'So i might find a song i love to pieces, and upon hearing it i feel like my life is complete. But after listening to it over and over it gets old and don\'t enjoy it...',
 		user: "Nicky",
 		userID: 3,
 		date: '20-04-2014',
 		featured: true,
-		categoryIDs: ['09']
+		categoryIDs: [09]
 	}, {
 		id: 9,
 		title: 'Do you know what song this is?',
@@ -126,7 +126,7 @@ ServicesModule.factory('Questions',function() {
 		userID: 4,
 		featured: false,
 		date: '20-04-2014',
-		categoryIDs: ['01']
+		categoryIDs: [1]
 	}, {
 		id: 10,
 		title: 'The Walking Dead Comics?',
@@ -135,8 +135,28 @@ ServicesModule.factory('Questions',function() {
 		userID: 5,
 		featured: true,
 		date: '20-04-2014',
-		categoryIDs: ['05', '10', '09']
-	}];
+		categoryIDs: [5, 10, 9]
+	},{
+		id: 11,
+		title: 'Have you seen my ex-girfriend',
+		description: 'She\'s so sexy',
+		user: "Psycho",
+		userID: 4,
+		featured: false,
+		date: '20-04-2014',
+		categoryIDs: [2,5,6,7]
+	},
+	{
+		id: 12,
+		title: 'What is the best beautiful hair style in 2014 ?',
+		description: 'She\'s so sexy',
+		user: "Psycho",
+		userID: 4,
+		featured: false,
+		date: '20-04-2014',
+		categoryIDs: [2, 6]
+	}
+	];
 	
 
 	var Questions = {
@@ -150,7 +170,8 @@ ServicesModule.factory('Questions',function() {
 		queryByCategory: function(id){
 
 			var arrayResult = _.filter(data, function(q){ 
-				return q.categoryIDs.indexOf(id) != -1 
+	
+				return q.categoryIDs.indexOf(parseFloat(id)) != -1 
 			});
 
 			return arrayResult;
