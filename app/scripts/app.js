@@ -65,6 +65,7 @@ QAP.controller('CategoriesListController', function ($scope, Categories) {
 QAP.controller('UsersController', function ($scope, Users) {
     $scope.users = Users.query();
 	$scope.currentUser = Users.getUserById(QAP.currentUserId);
+	
 	$scope.login = function (id) {
 		$scope.currentUser = Users.getUserById(id);
 		QAP.currentUserId = $scope.currentUser.id;

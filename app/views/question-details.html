@@ -28,7 +28,8 @@
 	<div id="answersArea" class="media-list">
 		<h3>Answers</h3>
 		<div class="answer clearfix media" data-ng-controller="AnswerItemController" data-ng-repeat="answer in answersForThis | orderBy:['-point','-date']" data-id="{{ answer.id }}">
-			<div class="pull-left" data-ng-class="{disabled: !rateAvai}">
+
+			<div class="pull-left" data-ng-class="{disabled: !rateAvai()}">
 				<div data-ng-click="rate(1)" class="like"></div>
 				<div class="point" data-ng-class="{danger: answer.point < 0}">{{ answer.point }}</div>
 				<div data-ng-click="rate(-1)" class="dislike"></div>

@@ -127,7 +127,7 @@ ServicesModule.factory('Questions',function($cookieStore) {
 	
 	var Questions = {
 		query: function() {
-			
+
 			if ( $cookieStore.get(QAP.cookies.questions) ) {
 				data = $cookieStore.get(QAP.cookies.questions);
 			}
@@ -142,7 +142,7 @@ ServicesModule.factory('Questions',function($cookieStore) {
 		queryByCategory: function(id){
 
 			var arrayResult = _.filter(data, function(q){ 
-				return q.categoryIDs.indexOf(id) != -1 
+				return q.categoryIDs.indexOf(parseInt(id)) != -1 
 			});
 
 			return arrayResult;
