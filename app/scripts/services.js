@@ -1,4 +1,4 @@
-var ServicesModule = angular.module('services', ['ngCookies']);
+var ServicesModule = angular.module('QAP.services', ['ngCookies']);
 
 ServicesModule.factory('Users',function ($cookieStore) {
 	var data = [
@@ -58,6 +58,7 @@ ServicesModule.factory('Questions',function($cookieStore) {
 		title: 'Sao nóng quá vậy nè???',
 		description: "Trời nóng quá là nóng phải làm sao đây?",
 		userID: 1,
+		featured: true,
 		date: '2014-04-20T10:50:00+0700',
 		categoryIDs: [1,2]
 	}, {
@@ -65,6 +66,7 @@ ServicesModule.factory('Questions',function($cookieStore) {
 		title: 'Why international public opinion did not support the Hungarian Revolution of 1956?',
 		description: 'Why why why why ?',
 		userID: 2,
+		featured: true,
 		date: '2014-04-20T10:50:00+0700',
 		categoryIDs: [1,10]
 	}, {
@@ -72,6 +74,7 @@ ServicesModule.factory('Questions',function($cookieStore) {
 		title: 'How long do you think it would take the average person to be able to learn to draw from a living?',
 		description: 'I want to draw good enough that I can make a living from it and Im starting my drawing training today although I have been drawing(hundreds of drawings) since last year but not as serious as Im about to get now as I need to be good enough to make a living at it. Im curious as to what you think about this. Im a young adult by the way.',
 		userID: 3,
+		featured: false,
 		date: '2014-04-20T10:50:00+0700',
 		categoryIDs: [1]
 	}, {
@@ -79,6 +82,7 @@ ServicesModule.factory('Questions',function($cookieStore) {
 		title: 'When will be Germany and Austria available in Google Street View?',
 		description: 'Almost all others country are already available, but Germany and Austria still not. I dont understand why...:-(',
 		userID: 4,
+		featured: true,
 		date: '2014-04-20T10:50:00+0700',
 		categoryIDs: [5]
 	}, {
@@ -86,6 +90,7 @@ ServicesModule.factory('Questions',function($cookieStore) {
 		title: 'Download flappy bird?',
 		description: 'Is it still available anywhere? or is it gone forever because I accidentally deleted...',
 		userID: 5,
+		featured: false,
 		date: '2014-04-20T10:50:00+0700',
 		categoryIDs: [5]
 	}, {
@@ -93,6 +98,7 @@ ServicesModule.factory('Questions',function($cookieStore) {
 		title: 'How to fix dissapeared text and folders in window 7?',
 		description: 'I accedently sitched off my pc directly through ups! after that my pc recoverd automatically! after that i cant see any text under folders and icons in desktop! my start menu dosent open,...',
 		userID: 1,
+		featured: false,
 		date: '2014-04-20T10:50:00+0700',
 		categoryIDs: [5,10]
 	}, {
@@ -100,6 +106,7 @@ ServicesModule.factory('Questions',function($cookieStore) {
 		title: 'What are your top ten Disney movies?',
 		description: 'Hi I was thinking \'bout having a Disney movie marathon and I was wondering if you could give me your top ten...',
 		userID: 2,
+		featured: false,
 		date: '2014-04-20T10:50:00+0700',
 		categoryIDs: [9]
 	}, {
@@ -107,6 +114,7 @@ ServicesModule.factory('Questions',function($cookieStore) {
 		title: 'Why do we lose our interest for a song?',
 		description: 'So i might find a song i love to pieces, and upon hearing it i feel like my life is complete. But after listening to it over and over it gets old and don\'t enjoy it...',
 		userID: 3,
+		featured: false,
 		date: '2014-04-20T10:50:00+0700',
 		categoryIDs: [9]
 	}, {
@@ -114,6 +122,7 @@ ServicesModule.factory('Questions',function($cookieStore) {
 		title: 'Do you know what song this is?',
 		description: 'youtube.com/watch?v=HoYA68W0dcY Bum ba la bum - can\'t get it out of my head and need more :3',
 		userID: 4,
+		featured: false,
 		date: '2014-04-20T10:50:00+0700',
 		categoryIDs: [1]
 	}, {
@@ -121,12 +130,14 @@ ServicesModule.factory('Questions',function($cookieStore) {
 		title: 'The Walking Dead Comics?',
 		description: 'I have read all of The Walking Dead comics online so far. But I want to start getting a copy and reading them.',
 		userID: 5,
+		featured: true,
 		date: '2014-04-20T10:50:00+0700',
 		categoryIDs: [5,10,9]
 	}];
 	
 	var Questions = {
 		query: function() {
+
 			if ( $cookieStore.get(QAP.cookies.questions) ) {
 				data = $cookieStore.get(QAP.cookies.questions);
 			}
@@ -141,7 +152,14 @@ ServicesModule.factory('Questions',function($cookieStore) {
 		queryByCategory: function(id){
 
 			var arrayResult = _.filter(data, function(q){ 
-				return q.categoryIDs.indexOf(id) != -1 
+				return q.categoryIDs.indexOf(parseInt(id)) != -1 
+			});
+
+			return arrayResult;
+		},
+		getFeaturedQuestions: function() {
+			var arrayResult = _.filter(data, function(q){ 
+				return q.featured;
 			});
 
 			return arrayResult;
@@ -221,21 +239,21 @@ ServicesModule.factory('Answers', function($cookieStore) {
 				'userID': 2,
 				'content': 'Đi tắm đi!',
 				'point': 2,
-				'ratedBy': [2,3]
+				'ratedBy': [3]
 			},{
 				'id': 3,
 				'date':'2014-04-24T10:50:00+0700',
 				'userID': 3,
 				'content': 'Cởi đồ ra!',
 				'point': 0,
-				'ratedBy': [2,3]
+				'ratedBy': [2,4]
 			},{
 				'id': 4,
 				'date':'2014-04-24T10:50:00+0700',
 				'userID': 4,
 				'content': 'Mở máy quạt!',
 				'point': 4,
-				'ratedBy': [2,3,4,5]
+				'ratedBy': [2,3,5]
 			},{
 				'id': 5,
 				'date':'2014-04-22T10:50:00+0700',

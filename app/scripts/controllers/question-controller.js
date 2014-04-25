@@ -1,4 +1,4 @@
-var QuestionControllers = angular.module('QuestionControllers', ['services','filters','ngCookies']);
+var QuestionControllers = angular.module('QAP.QuestionControllers', ['QAP.services','QAP.filters','ngCookies']);
 
 // RENDER QUESTION LIST
 QuestionControllers.controller('QuestionsListController', function($scope, Questions, Categories, $routeParams) {
@@ -15,7 +15,9 @@ QuestionControllers.controller('QuestionsListController', function($scope, Quest
 	} else {
 		$scope.questions = Questions.query();
 	}
-	
+
+	$scope.featuredQuestions = Questions.getFeaturedQuestions();
+
 	$scope.changePredicate = function(newPredicate) {
 		switch(newPredicate) {
 			case 'popular':
@@ -86,12 +88,15 @@ QuestionControllers.controller('QuestionDetailsController', function($scope, $fi
 
 // ANSWER OF QUESTION DETAIL
 QuestionControllers.controller('AnswerItemController', function ($scope, $filter, Answers, Users, $routeParams) {
+
 	$scope.questionId = $routeParams.id;
 	$scope.answer = Answers.getAnswerById($scope.questionId, $scope.answer.id);
 	$scope.answerUser = Users.getUserById($scope.answer.userID);
 	
-	$scope.rateAvai = ($scope.answer.userID == QAP.currentUserId || $scope.answer.ratedBy.indexOf(QAP.currentUserId) > 0) ? 0 : 1;
-	
+	$scope.rateAvai = function() {
+		return ($scope.answer.userID == QAP.currentUserId || $scope.answer.ratedBy.indexOf(QAP.currentUserId) > 0) ? 0 : 1;
+	} 
+
 	// LIKE OR DISLIKE ANSWER
 	$scope.rate = function (point) {
 		if ( $scope.rateAvai ) {

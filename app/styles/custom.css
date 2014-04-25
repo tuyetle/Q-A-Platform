@@ -20,10 +20,25 @@ h1 a:hover {
 	margin-right: 10px;
 }
 
+
+
 *{outline:none!important}
 
 #questionPage{padding:0 0 50px}
 #questionPage hr{clear:both}
+
+#questionPage .author{padding-left:0;clear:both;padding-bottom:10px}
+#questionPage .author strong{color:#4a6b82}
+#questionPage .author span{color:#444;margin-left:5px}
+#questionPage .date{text-align:right;color:#999;padding-right:0;padding-bottom:10px}
+#questionPage .answerContent{overflow:hidden}
+#questionPage .pointArea{float:right;text-align:center;padding:0 0 10px 10px}
+#questionPage .pointArea *{vertical-align:middle}
+#questionPage .pointArea .point{font-size:18px;color:green}
+#questionPage .pointArea .point.danger{color:red}
+
+#commentArea .comment{width:100%;height:100px;padding:10px;border-radius:10px;outline:0}
+#commentArea .buttons{text-align:right}
 
 #questionPage .like,
 #questionPage .dislike{cursor:pointer;display:block;margin:0 auto;width:41px;height:25px;background:url(../images/sprites.png) no-repeat}
@@ -59,4 +74,30 @@ h1 a:hover {
 	border-radius: 10px;
 	overflow: hidden;
 	height: 360px;
+}
+
+.category-container {
+	position: fixed;
+	top: 91px;
+	left: 50%;
+	margin-left: -599px;
+}
+.category-container .category-list-sidebar {
+	width: 195px;
+	
+}
+.carousel-inner,
+.carousel-inner > .item,
+.container .jumbotron {
+	height: 100%;
+} 
+.container .jumbotron {
+	padding-left: 70px;
+	padding-right: 70px;
+}
+.carousel-indicators li{
+	border: 1px solid #428BCA
+}
+.carousel-indicators .active {
+	background-color: #428BCA
 }
