@@ -57,3 +57,18 @@ h1 a:hover {
 	width: 195px;
 	
 }
+.carousel-inner,
+.carousel-inner > .item,
+.container .jumbotron {
+	height: 100%;
+} 
+.container .jumbotron {
+	padding-left: 70px;
+	padding-right: 70px;
+}
+.carousel-indicators li{
+	border: 1px solid #428BCA
+}
+.carousel-indicators .active {
+	background-color: #428BCA
+}

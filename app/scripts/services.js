@@ -48,10 +48,11 @@ ServicesModule.factory('Users',function () {
 ServicesModule.factory('Questions',function() {
 	var data = [{
 		id: 1,
-		title: 'Sao nóng quá vậy nè???',
-		description: "Trời nóng quá là nóng phải làm sao đây?",
+		title: 'Sao lạnh quá vậy nè???',
+		description: "Trời lạnh quá là nóng phải làm sao đây?",
 		user: "Long",
 		userID: 1,
+		featured: true,
 		date: '20-04-2014',
 		categoryIDs: ['01']
 	}, {
@@ -60,6 +61,7 @@ ServicesModule.factory('Questions',function() {
 		description: 'Why why why why ?',
 		user: "Tu4n",
 		userID: 2,
+		featured: false,
 		date: '20-04-2014',
 		categoryIDs: ['01','10']
 	}, {
@@ -68,6 +70,7 @@ ServicesModule.factory('Questions',function() {
 		description: 'I want to draw good enough that I can make a living from it and Im starting my drawing training today although I have been drawing(hundreds of drawings) since last year but not as serious as Im about to get now as I need to be good enough to make a living at it. Im curious as to what you think about this. Im a young adult by the way.',
 		user: "user 3",
 		userID: 3,
+		featured: true,
 		date: '20-04-2014',
 		categoryIDs: ['01']
 	}, {
@@ -76,6 +79,7 @@ ServicesModule.factory('Questions',function() {
 		description: 'Almost all others country are already available, but Germany and Austria still not. I dont understand why...:-(',
 		user: "Jaloslav",
 		userID: 4,
+		featured: true,
 		date: '20-04-2014',
 		categoryIDs: ['05']
 	}, {
@@ -84,6 +88,7 @@ ServicesModule.factory('Questions',function() {
 		description: 'Is it still available anywhere? or is it gone forever because I accidentally deleted...',
 		user: "Joe",
 		userID: 5,
+		featured: false,
 		date: '20-04-2014',
 		categoryIDs: ['05']
 	}, {
@@ -92,6 +97,7 @@ ServicesModule.factory('Questions',function() {
 		description: 'I accedently sitched off my pc directly through ups! after that my pc recoverd automatically! after that i cant see any text under folders and icons in desktop! my start menu dosent open,...',
 		user: "cammy",
 		userID: 1,
+		featured: true,
 		date: '20-04-2014',
 		categoryIDs: ['05','10']
 	}, {
@@ -100,6 +106,7 @@ ServicesModule.factory('Questions',function() {
 		description: 'Hi I was thinking \'bout having a Disney movie marathon and I was wondering if you could give me your top ten...',
 		user: "Rick",
 		userID: 2,
+		featured: false,
 		date: '20-04-2014',
 		categoryIDs: ['09']
 	}, {
@@ -109,6 +116,7 @@ ServicesModule.factory('Questions',function() {
 		user: "Nicky",
 		userID: 3,
 		date: '20-04-2014',
+		featured: true,
 		categoryIDs: ['09']
 	}, {
 		id: 9,
@@ -116,6 +124,7 @@ ServicesModule.factory('Questions',function() {
 		description: 'youtube.com/watch?v=HoYA68W0dcY Bum ba la bum - can\'t get it out of my head and need more :3',
 		user: "Shao",
 		userID: 4,
+		featured: false,
 		date: '20-04-2014',
 		categoryIDs: ['01']
 	}, {
@@ -124,6 +133,7 @@ ServicesModule.factory('Questions',function() {
 		description: 'I have read all of The Walking Dead comics online so far. But I want to start getting a copy and reading them.',
 		user: "Psycho",
 		userID: 5,
+		featured: true,
 		date: '20-04-2014',
 		categoryIDs: ['05', '10', '09']
 	}];
@@ -155,6 +165,12 @@ ServicesModule.factory('Questions',function() {
 				}
    			};
    			return null;
+		},
+		getFeaturedQuestion: function(){
+			var filterFeatured = _.filter(data, function(question){
+				return question.featured == true;
+			});
+			return filterFeatured;
 		}
 	}
 	return Questions;

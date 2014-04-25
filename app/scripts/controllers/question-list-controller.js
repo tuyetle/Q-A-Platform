@@ -1,4 +1,4 @@
-var QuestionControllers = angular.module('QuestionControllers', ['services']);
+var QuestionControllers = angular.module('QuestionControllers', ['services', 'filters']);
 
 
 QuestionControllers.controller('QuestionsListController', function($scope, Questions, Categories, $routeParams) {
@@ -14,6 +14,7 @@ QuestionControllers.controller('QuestionsListController', function($scope, Quest
 		$scope.showCarousel = false;
 	} else {
 		$scope.questions = Questions.query();
+		$scope.featuredQuestions = Questions.getFeaturedQuestion();
 	}
 	
 	$scope.changePredicate = function(newPredicate) {
@@ -27,6 +28,10 @@ QuestionControllers.controller('QuestionsListController', function($scope, Quest
 				$scope.sortOption.reverse = false;
 				break;
 		}
+	}
+
+	$scope.maxlength = function(){
+
 	}
 });
 
