@@ -51,14 +51,15 @@ QAP.controller('MainController', function ($scope, $location, $cookieStore, Ques
 	Categories.query();
 });
 
-QAP.controller('CategoriesListController', function ($scope, Categories) {
+QAP.controller('CategoriesListController', function ($scope, Categories, $rootScope) {
     // Category
     $scope.categoryList = Categories.query();
 
-   	$scope.selectedCategory = '-1';
+
+   	$rootScope.selectedCategory = '-1';
 
    	$scope.selectCategory = function(id) {
-   		$scope.selectedCategory = id;
+   		$rootScope.selectedCategory = id;
    	}
 });
 

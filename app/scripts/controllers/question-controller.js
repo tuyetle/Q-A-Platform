@@ -26,11 +26,14 @@ QuestionControllers.controller('QuestionsListController', function($scope, Quest
 });
 
 // HANDLE QUESTION ITEM IN LIST
-QuestionControllers.controller('QuestionsListItemController', function($scope, Answers, Users, Categories) {
+QuestionControllers.controller('QuestionsListItemController', function($scope, Answers, Users, Categories, $rootScope) {
 	$scope.answersLength = Answers.getAnswersLengthByQuestionId($scope.question.id);
 	$scope.statusLabelClass = $scope.answersLength > 0 ? 'label-success':'label-default';
 	$scope.categories = Categories.getCategoriesByIDs($scope.question.categoryIDs);
 	$scope.askedUser = Users.getUserById($scope.question.userID);
+	$scope.changeCategory = function (id) {
+		$rootScope.selectedCategory = id;
+	}
 });
 
 // CREATE NEW QUESTION
