@@ -127,6 +127,7 @@ ServicesModule.factory('Questions',function($cookieStore) {
 	
 	var Questions = {
 		query: function() {
+			
 			if ( $cookieStore.get(QAP.cookies.questions) ) {
 				data = $cookieStore.get(QAP.cookies.questions);
 			}
