@@ -1,19 +1,24 @@
-<div ng-controller="QuestionsListController" ng-show="showCarousel" id="carousel-example-generic" class="carousel slide featured-question-carousel" data-ride="carousel">
+
+<div data-ng-controller="QuestionsListController" data-ng-show="showCarousel" id="carousel-example-generic" class="carousel slide featured-question-carousel" data-ride="carousel">
   <!-- Indicators -->
+
   <ol class="carousel-indicators" >
     <li ng-repeat="question in featuredQuestions" data-target="#carousel-example-generic" data-slide-to="{{question[$index]}}" ng-class="{active: $index == 0}"></li>
   </ol>
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
+
     <div ng-repeat="question in featuredQuestions" class="item" ng-class="
     {active: $index == 0}">
         <div class="jumbotron">
+
 		  <h2 >{{question.title | truncate:15 }}</h2>
 		  <p class="description">{{question.description | truncate:25 }}</p>
 		  <p><a href="#/q-details/{{question.id}}" class="btn btn-primary btn-lg" role="button">Learn more</a></p>
 		</div>
     </div>
+   
   </div>
 
   <!-- Controls -->
@@ -27,42 +32,45 @@
 <div class="panel panel-default">
 	<div class="panel-heading clearfix">
 		<ul class="nav nav-pills pull-left">
-			<li ng-class="{active: sortOption.predicate=='title'}">
-				<a href="" ng-click="changePredicate('alphabet')" title="Alphabet">Alphabet</a>
+
+			<li data-ng-class="{active: sortOption.predicate=='date'}">
+				<a href="" data-ng-click="changePredicate('alphabet')" title="Newest">Newest</a>
 			</li>
-			<li ng-class="{active: sortOption.predicate=='anwsers'}">
-				<a href="" ng-click="changePredicate('popular')" title="Popular">Popular</a>
+
+			<li data-ng-class="{active: sortOption.predicate=='anwsers'}">
+				<a href="" data-ng-click="changePredicate('popular')" title="Popular">Popular</a>
 			</li>
 		</ul>
 
+
 	</div>
-	<ul class="list-group">
-		<li ng-controller="QuestionsListItemController" ng-repeat="question in questions | orderBy: sortOption.predicate : sortOption.reverse" class="list-group-item">
+	
+	<ul class="list-group question-list">
+		<li data-ng-controller="QuestionsListItemController" data-ng-repeat="question in questions | orderBy: sortOption.predicate : sortOption.reverse" class="list-group-item">
 			<blockquote>
 				<a href="#/q-details/{{question.id}}" title="{{question.title}}">{{question.title}}</a>
 			</blockquote>
-			<p ng-show="question.description.length >
+		
+			<p class="desc" data-ng-show="question.description.length >
 				0">
+		  
 		        {{question.description | truncate:15}}
 			</p>
 			<div class="clearfix">
-				<p class="pull-left">
-					<small>
-						Asked by <b><i>{{question.user}}</i></b> 
-						in <b>{{question.date | date: 'medium'}}</b>
-					</small>
-				</p>
-				<p class="pull-right">
-					<span ng-class="statusLabelClass" class="label">{{answersLength}} anwsers
-					</span>
-				</p>
+
+				<div class="clearfix">
+					<div class="date pull-right">asked {{ question.date | smartDateTime }}</div>
+					<div class="author pull-left"><img src="{{askedUser.avatar}}" alt="" width="20" height="20"><strong>{{ askedUser.name }}</strong> &middot; <span>{{ askedUser.point }}</span></div>
+				</div>
 			</div>
-			<p class="categories clearfix">
-				Tags:
-				<a href="#/category/{{category.id}}" title="{{ category.name }}" ng-repeat="category in categories" class="label label-warning">{{ category.name }}</a>
-			</p>
+
+			<div class="categories clearfix">
+				<div class="pull-right"><span data-ng-class="statusLabelClass" class="label">{{answersLength}} anwsers</span></div>
+				<div class="tags"><a href="#/category/{{category.id}}" title="{{ category.name }}" data-ng-repeat="category in categories" class="label label-warning">{{ category.name }}</a></div>
+			</div>
 		</li>
 	</ul>
 	<div class="panel-footer">
+
 	</div>
 </div>

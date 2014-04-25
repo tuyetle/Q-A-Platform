@@ -1,177 +1,148 @@
-var ServicesModule = angular.module('services', []);
+var ServicesModule = angular.module('services', ['ngCookies']);
 
-ServicesModule.factory('Users',function () {
+ServicesModule.factory('Users',function ($cookieStore) {
 	var data = [
 		{
 			id: 1,
 			name: 'Hòa',
-			joinDate: '01-01-2014',
+			joinDate:'2014-01-01T10:50:00+0700',
+			avatar: 'http://cozio.com/forum/Skins/Classic/Images/EmotIcons/Blink.gif',
 			point: 754
 		},{
 			id: 2,
 			name: 'Tuyết',
-			joinDate: '01-01-2014',
+			joinDate:'2014-01-01T10:50:00+0700',
+			avatar: 'http://m.essentialbaby.com.au/forums/public/style_emoticons/default/biggrin.png',
 			point: 812
 		},{
 			id: 3,
 			name: 'Tuyến',
-			joinDate: '01-01-2014',
+			joinDate:'2014-01-01T10:50:00+0700',
+			avatar: 'http://www.essentialbaby.com.au/forums/style_emoticons/default/glare.gif',
 			point: 813
 		},{
 			id: 4,
 			name: 'Thảo',
-			joinDate: '01-01-2014',
+			joinDate:'2014-01-01T10:50:00+0700',
+			avatar: 'http://community.babycenter.com/js/tinymce_3_5_6/plugins/smileys/img/smiley-yell.gif',
 			point: 566
 		},{
 			id: 5,
 			name: 'Long',
-			joinDate: '01-01-2014',
+			joinDate:'2014-01-01T10:50:00+0700',
+			avatar: 'http://community.babycenter.com/js/tinymce_3_2_5/plugins/smileys/img/smiley-cool.gif',
 			point: 235
 		}
 	];
 	
-
 	var Users = {
 		query: function () {
+			if ( $cookieStore.get(QAP.cookies.users) ) {
+				data = $cookieStore.get(QAP.cookies.users);
+			}
 			return data;
 		},
 		getUserById: function (id) {
 			return _.find(data,function(rw){ return rw.id == id });
 		},
-		getCurrentUser: function () {
-			return data[4];
+		save: function () {
+			$cookieStore.put(QAP.cookies.users,data);
 		}
 	};
 	return Users;
 });
 
-ServicesModule.factory('Questions',function() {
+ServicesModule.factory('Questions',function($cookieStore) {
 	var data = [{
 		id: 1,
-		title: 'Sao lạnh quá vậy nè???',
-		description: "Trời lạnh quá là nóng phải làm sao đây?",
-		user: "Long",
+		title: 'Sao nóng quá vậy nè???',
+		description: "Trời nóng quá là nóng phải làm sao đây?",
 		userID: 1,
-		featured: true,
-		date: '20-04-2014',
+		date: '2014-04-20T10:50:00+0700',
 		categoryIDs: [1]
 	}, {
 		id: 2,
 		title: 'Why international public opinion did not support the Hungarian Revolution of 1956?',
 		description: 'Why why why why ?',
-		user: "Tu4n",
 		userID: 2,
-		featured: false,
-		date: '20-04-2014',
+		date: '2014-04-20T10:50:00+0700',
 		categoryIDs: [1,10]
 	}, {
 		id: 3,
 		title: 'How long do you think it would take the average person to be able to learn to draw from a living?',
 		description: 'I want to draw good enough that I can make a living from it and Im starting my drawing training today although I have been drawing(hundreds of drawings) since last year but not as serious as Im about to get now as I need to be good enough to make a living at it. Im curious as to what you think about this. Im a young adult by the way.',
-		user: "user 3",
 		userID: 3,
-		featured: true,
-		date: '20-04-2014',
+		date: '2014-04-20T10:50:00+0700',
 		categoryIDs: [1]
 	}, {
 		id: 4,
 		title: 'When will be Germany and Austria available in Google Street View?',
 		description: 'Almost all others country are already available, but Germany and Austria still not. I dont understand why...:-(',
-		user: "Jaloslav",
 		userID: 4,
-		featured: false,
-		date: '20-04-2014',
+		date: '2014-04-20T10:50:00+0700',
 		categoryIDs: [5]
 	}, {
 		id: 5,
 		title: 'Download flappy bird?',
 		description: 'Is it still available anywhere? or is it gone forever because I accidentally deleted...',
-		user: "Joe",
 		userID: 5,
-		featured: false,
-		date: '20-04-2014',
+		date: '2014-04-20T10:50:00+0700',
 		categoryIDs: [5]
 	}, {
 		id: 6,
 		title: 'How to fix dissapeared text and folders in window 7?',
 		description: 'I accedently sitched off my pc directly through ups! after that my pc recoverd automatically! after that i cant see any text under folders and icons in desktop! my start menu dosent open,...',
-		user: "cammy",
 		userID: 1,
-		featured: true,
-		date: '20-04-2014',
+		date: '2014-04-20T10:50:00+0700',
 		categoryIDs: [5,10]
 	}, {
 		id: 7,
 		title: 'What are your top ten Disney movies?',
 		description: 'Hi I was thinking \'bout having a Disney movie marathon and I was wondering if you could give me your top ten...',
-		user: "Rick",
 		userID: 2,
-		featured: false,
-		date: '20-04-2014',
-		categoryIDs: [09]
-	}, 
-		{id: 8,
+		date: '2014-04-20T10:50:00+0700',
+		categoryIDs: [9]
+	}, {
+		id: 8,
 		title: 'Why do we lose our interest for a song?',
 		description: 'So i might find a song i love to pieces, and upon hearing it i feel like my life is complete. But after listening to it over and over it gets old and don\'t enjoy it...',
-		user: "Nicky",
 		userID: 3,
-		date: '20-04-2014',
-		featured: true,
-		categoryIDs: [09]
+		date: '2014-04-20T10:50:00+0700',
+		categoryIDs: [9]
 	}, {
 		id: 9,
 		title: 'Do you know what song this is?',
 		description: 'youtube.com/watch?v=HoYA68W0dcY Bum ba la bum - can\'t get it out of my head and need more :3',
-		user: "Shao",
 		userID: 4,
-		featured: false,
-		date: '20-04-2014',
+		date: '2014-04-20T10:50:00+0700',
 		categoryIDs: [1]
 	}, {
 		id: 10,
 		title: 'The Walking Dead Comics?',
 		description: 'I have read all of The Walking Dead comics online so far. But I want to start getting a copy and reading them.',
-		user: "Psycho",
 		userID: 5,
-		featured: true,
-		date: '20-04-2014',
-		categoryIDs: [5, 10, 9]
-	},{
-		id: 11,
-		title: 'Have you seen my ex-girfriend',
-		description: 'She\'s so sexy',
-		user: "Psycho",
-		userID: 4,
-		featured: false,
-		date: '20-04-2014',
-		categoryIDs: [2,5,6,7]
-	},
-	{
-		id: 12,
-		title: 'What is the best beautiful hair style in 2014 ?',
-		description: 'She\'s so sexy',
-		user: "Psycho",
-		userID: 4,
-		featured: false,
-		date: '20-04-2014',
-		categoryIDs: [2, 6]
-	}
-	];
+		date: '2014-04-20T10:50:00+0700',
+		categoryIDs: [5,10,9]
+	}];
 	
-
 	var Questions = {
 		query: function() {
+
+			if ( $cookieStore.get(QAP.cookies.questions) ) {
+				data = $cookieStore.get(QAP.cookies.questions);
+			}
 			return data;
 		},
 		askQuestion: function(question) {
 			_.extend(question, {id: data.length + 1, answers: 0});
-			return data.push(question); //return the length of data
+			var result = data.push(question);
+			this.save();
+			return result; //return the length of data
 		},
 		queryByCategory: function(id){
 
 			var arrayResult = _.filter(data, function(q){ 
-	
-				return q.categoryIDs.indexOf(parseFloat(id)) != -1 
+				return q.categoryIDs.indexOf(parseInt(id)) != -1 
 			});
 
 			return arrayResult;
@@ -187,30 +158,30 @@ ServicesModule.factory('Questions',function() {
    			};
    			return null;
 		},
-		getFeaturedQuestion: function(){
-			var filterFeatured = _.filter(data, function(question){
-				return question.featured == true;
-			});
-			return filterFeatured;
+		save: function () {
+			$cookieStore.put(QAP.cookies.questions,data);
 		}
 	}
 	return Questions;
 });
 
-ServicesModule.factory('Categories', function() {
+ServicesModule.factory('Categories', function($cookieStore) {
 	var data = {
-		1: {'id': 1, 'name': 'Arts & Humanities'}, 
-		2: {'id': 2, 'name': 'Beauty & Style'},
-		3: {'id': 3, 'name': 'Business & Finance'},
-		4: {'id': 4, 'name': 'Cars & Transportation'}, 
-		5: {'id': 5, 'name': 'Computers & Internet'},
-		6: {'id': 6, 'name': 'Dining Out'},
-		7: {'id': 7, 'name': 'Consumer Electronics'},
-		9: {'id': 9, 'name': 'Entertainment & Music'},
-		10: {'id': 10, 'name': 'Education & Reference'}
+		1: {'id': 1, 'name': 'Arts & Humanities', 'total': 10}, 
+		2: {'id': 2, 'name': 'Beauty & Style', 'total': 6},
+		3: {'id': 3, 'name': 'Business & Finance', 'total': 5},
+		4: {'id': 4, 'name': 'Cars & Transportation', 'total': 9}, 
+		5: {'id': 5, 'name': 'Computers & Internet', 'total': 5},
+		6: {'id': 6, 'name': 'Dining Out', 'total': 6},
+		7: {'id': 7, 'name': 'Consumer Electronics', 'total': 8},
+		9: {'id': 9, 'name': 'Entertainment & Music', 'total': 12},
+		10: {'id': 10, 'name': 'Education & Reference', 'total': 8}
 	};
    	var Categories = {
    		query: function() {
+			if ( $cookieStore.get(QAP.cookies.categories) ) {
+				data = $cookieStore.get(QAP.cookies.categories);
+			}
    			return data;
    		},
    		getCategoriesByIDs: function(ids) {
@@ -221,133 +192,179 @@ ServicesModule.factory('Categories', function() {
    					arr.push(data[id]);
    			};
    			return arr;
-   		}
+   		},
+		change: function (arr) {
+			for (var i = 0; i < arr.length; i++) {
+				data[arr[i]].total++;
+			}
+			this.save();
+		},
+		save: function () {
+			$cookieStore.put(QAP.cookies.categories,data);
+		}
    	};
 	return Categories;
 });
 
-ServicesModule.factory('Answers', function() {
+ServicesModule.factory('Answers', function($cookieStore) {
 	var data = {
 		1:[
 			{
 				'id': 1,
-				'date': '22-04-2014',
+				'date':'2014-04-22T10:50:00+0700',
 				'userID': 1,
 				'content': 'Bật điều hòa lên!',
-				'point': 10
+				'point': 3,
+				'ratedBy': [2,3,4]
 			},{
 				'id': 2,
-				'date': '22-04-2014',
+				'date':'2014-04-22T06:50:00+0700',
 				'userID': 2,
 				'content': 'Đi tắm đi!',
-				'point': 10
+				'point': 2,
+				'ratedBy': [2,3]
 			},{
 				'id': 3,
-				'date': '22-04-2014',
+				'date':'2014-04-24T10:50:00+0700',
 				'userID': 3,
 				'content': 'Cởi đồ ra!',
-				'point': 8
+				'point': 0,
+				'ratedBy': [2,3]
 			},{
 				'id': 4,
-				'date': '22-04-2014',
+				'date':'2014-04-24T10:50:00+0700',
 				'userID': 4,
 				'content': 'Mở máy quạt!',
-				'point': 5
+				'point': 4,
+				'ratedBy': [2,3,4,5]
 			},{
 				'id': 5,
-				'date': '22-04-2014',
+				'date':'2014-04-22T10:50:00+0700',
 				'userID': 5,
 				'content': 'Tui không biết!',
-				'point': -6
+				'point': -2,
+				'ratedBy': [2,3]
 			}
 		],
 		2:[
 			{
 				'id': 6,
-				'date': '22-04-2014',
+				'date':'2014-04-22T10:50:00+0700',
 				'userID': 1,
 				'content': 'Tui không biết!',
-				'point': 10
+				'point': 10,
+				'ratedBy': []
 			},{
 				'id': 7,
-				'date': '22-04-2014',
+				'date':'2014-04-22T10:50:00+0700',
 				'userID': 2,
 				'content': 'Tui không biết!',
-				'point': 10
+				'point': 10,
+				'ratedBy': []
 			},{
 				'id': 8,
-				'date': '22-04-2014',
+				'date':'2014-04-22T10:50:00+0700',
 				'userID': 3,
 				'content': 'Tui không biết!',
-				'point': 8
+				'point': 8,
+				'ratedBy': []
 			},{
 				'id': 9,
-				'date': '22-04-2014',
+				'date':'2014-04-24T10:50:00+0700',
 				'userID': 4,
 				'content': 'Tui không biết!',
-				'point': 5
+				'point': 5,
+				'ratedBy': []
 			},{
 				'id': 10,
-				'date': '22-04-2014',
+				'date':'2014-04-22T10:50:00+0700',
 				'userID': 5,
 				'content': 'Tui không biết!',
-				'point': -6
+				'point': -6,
+				'ratedBy': []
 			}
 		],
 		3:[
 			{
 				'id': 11,
-				'date': '22-04-2014',
+				'date':'2014-04-22T10:50:00+0700',
 				'userID': 1,
 				'content': 'Tui không biết!',
-				'point': 10
+				'point': 10,
+				'ratedBy': []
 			},{
 				'id': 12,
-				'date': '22-04-2014',
+				'date':'2014-04-22T10:50:00+0700',
 				'userID': 2,
 				'content': 'Tui không biết!',
-				'point': 10
+				'point': 10,
+				'ratedBy': []
 			},{
 				'id': 13,
-				'date': '22-04-2014',
+				'date':'2014-04-22T10:50:00+0700',
 				'userID': 3,
 				'content': 'Tui không biết!',
-				'point': 8
+				'point': 8,
+				'ratedBy': []
 			},{
 				'id': 14,
-				'date': '22-04-2014',
+				'date':'2014-04-22T10:50:00+0700',
 				'userID': 4,
 				'content': 'Tui không biết!',
-				'point': 5
+				'point': 5,
+				'ratedBy': []
 			},{
 				'id': 15,
-				'date': '22-04-2014',
+				'date':'2014-04-22T10:50:00+0700',
 				'userID': 5,
 				'content': 'Tui không biết!',
-				'point': -6
+				'point': -6,
+				'ratedBy': []
 			}
 		]
 	};
 	var Answers = {
 		query: function() {
+			if ( $cookieStore.get(QAP.cookies.answers) ) {
+				data = $cookieStore.get(QAP.cookies.answers);
+			}
 			return data;
 		},
 		getAnswerById: function(questionId, answerId) {
 			return _.find(data[questionId],function(rw){ return rw.id == answerId });
 		},
 		getAnswersByQuestionId: function (id) {
+			if ( !data[id] ) {
+				data[id] = [];
+			}
 			return data[id];
 		},
 		getAnswersLengthByQuestionId: function(id) {
 			return data[id] == undefined ? 0 : data[id].length;
 		},
+		rateAnswer: function (questionId, answerId, point, currentUserId) {
+			var answer = _.find(data[questionId],function(rw){ return rw.id == answerId });
+			if ( answer.ratedBy.indexOf(currentUserId) < 0 && answer.userID != currentUserId ) {
+				answer.ratedBy.push(currentUserId);
+				answer.point += point;
+			}
+			this.save();
+			return false;
+		},
 		insertAnswer: function (questionId,answer) {
+			
 			var answerLength = 0;
 			for(var obj in data) {
 				answerLength += data[obj].length;
 			}
 			_.extend(answer, {id: answerLength + 1});
-			return data[questionId].push(answer);
+			
+			var result = data[questionId].push(answer);
+			this.save();
+			return result;
+		},
+		save: function () {
+			$cookieStore.put(QAP.cookies.answers,data);
 		}
 	};
 	return Answers;
