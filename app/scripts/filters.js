@@ -16,6 +16,7 @@ filters.filter('truncate', function() {
 		else return input;
 	}
 });
+
 filters.filter('smartDateTime', function($filter) {
 	return function (objDate) {
 		

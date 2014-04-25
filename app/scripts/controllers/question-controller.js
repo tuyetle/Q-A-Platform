@@ -1,13 +1,12 @@
 var QuestionControllers = angular.module('QAP.QuestionControllers', ['QAP.services','QAP.filters','ngCookies']);
 
 // RENDER QUESTION LIST
-QuestionControllers.controller('QuestionsListController', function($scope, Questions, Categories, $routeParams) {
+QuestionControllers.controller('QuestionsListController', function($scope, Questions, Categories, $routeParams, Answers) {
 	$scope.showCarousel = true;
+	$scope.predicate = 'date';
 
-	$scope.sortOption = {
-		predicate: 'date',
-		reverse: true
-	};
+
+
 
 	if($routeParams.id) {
 		$scope.questions = Questions.queryByCategory($routeParams.id);
@@ -18,18 +17,12 @@ QuestionControllers.controller('QuestionsListController', function($scope, Quest
 
 	$scope.featuredQuestions = Questions.getFeaturedQuestions();
 
+	$scope.getPredicate = function(q) {
+		return $scope.predicate == 'date' ? q.date : Answers.getAnswersLengthByQuestionId(q.id);
+	};
 	$scope.changePredicate = function(newPredicate) {
-		switch(newPredicate) {
-			case 'popular':
-				$scope.sortOption.predicate = "anwsers";
-				$scope.sortOption.reverse = true;
-				break;
-			default:
-				$scope.sortOption.predicate = "date";
-				$scope.sortOption.reverse = true;
-				break;
-		}
-	}
+		$scope.predicate = newPredicate;
+	};
 });
 
 // HANDLE QUESTION ITEM IN LIST
@@ -37,7 +30,6 @@ QuestionControllers.controller('QuestionsListItemController', function($scope, A
 	$scope.answersLength = Answers.getAnswersLengthByQuestionId($scope.question.id);
 	$scope.statusLabelClass = $scope.answersLength > 0 ? 'label-success':'label-default';
 	$scope.categories = Categories.getCategoriesByIDs($scope.question.categoryIDs);
-	
 	$scope.askedUser = Users.getUserById($scope.question.userID);
 });
 

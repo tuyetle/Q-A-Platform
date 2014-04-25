@@ -33,12 +33,12 @@
 	<div class="panel-heading clearfix">
 		<ul class="nav nav-pills pull-left">
 
-			<li data-ng-class="{active: sortOption.predicate=='date'}">
-				<a href="" data-ng-click="changePredicate('alphabet')" title="Newest">Newest</a>
+			<li data-ng-class="{active: predicate=='date'}">
+				<a href="" data-ng-click="changePredicate('date')" title="Newest">Newest</a>
 			</li>
 
-			<li data-ng-class="{active: sortOption.predicate=='anwsers'}">
-				<a href="" data-ng-click="changePredicate('popular')" title="Popular">Popular</a>
+			<li data-ng-class="{active: predicate=='answers'}">
+				<a href="" data-ng-click="changePredicate('answers')" title="Popular">Popular</a>
 			</li>
 		</ul>
 
@@ -46,7 +46,7 @@
 	</div>
 	
 	<ul class="list-group question-list">
-		<li data-ng-controller="QuestionsListItemController" data-ng-repeat="question in questions | orderBy: sortOption.predicate : sortOption.reverse" class="list-group-item">
+		<li data-ng-controller="QuestionsListItemController" data-ng-repeat="question in questions | orderBy: getPredicate: true" class="list-group-item">
 			<blockquote>
 				<a href="#/q-details/{{question.id}}" title="{{question.title}}">{{question.title}}</a>
 			</blockquote>
@@ -59,7 +59,7 @@
 			<div class="clearfix">
 
 				<div class="clearfix">
-					<div class="date pull-right">asked {{ question.date | smartDateTime }}</div>
+					<div class="date pull-right">{{ question.date | smartDateTime }}</div>
 					<div class="author pull-left"><img src="{{askedUser.avatar}}" alt="" width="20" height="20"><strong>{{ askedUser.name }}</strong> &middot; <span>{{ askedUser.point }}</span></div>
 				</div>
 			</div>
