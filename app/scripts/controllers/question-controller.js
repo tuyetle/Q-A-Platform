@@ -99,7 +99,7 @@ QuestionControllers.controller('AnswerItemController', function ($scope, $filter
 
 	// LIKE OR DISLIKE ANSWER
 	$scope.rate = function (point) {
-		if ( $scope.rateAvai ) {
+		if ( $scope.rateAvai() ) {
 			Answers.rateAnswer($scope.questionId,$scope.answer.id,point,QAP.currentUserId);
 			$scope.answerUser.point+=point;
 			$scope.rateAvai = 0;
