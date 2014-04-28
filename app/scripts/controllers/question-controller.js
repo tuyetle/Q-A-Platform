@@ -72,9 +72,7 @@ QuestionControllers.controller('QuestionDetailsController', function($scope, $fi
 	$scope.questionId = $routeParams.id;
 	$scope.question = Questions.getQuestionDetail($scope.questionId);
 	$scope.questionOwner = Users.getUserById($scope.question.userID);
-	
 	$scope.categories = Categories.getCategoriesByIDs($scope.question.categoryIDs);
-	
 	$scope.answersForThis = Answers.getAnswersByQuestionId($scope.questionId);
 
 });
