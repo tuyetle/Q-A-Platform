@@ -1,4 +1,4 @@
-var QuestionControllers = angular.module('QAP.QuestionControllers', ['QAP.services','QAP.filters','ngCookies','QAP.directives']);
+var QuestionControllers = angular.module('QAP.QuestionControllers', ['QAP.services','QAP.filters','ngCookies','QAP.directives', 'ngRoute']);
 
 // RENDER QUESTION LIST
 QuestionControllers.controller('QuestionsListController', function($rootScope, $scope, Questions, Categories, $routeParams, Answers) {
@@ -14,7 +14,7 @@ QuestionControllers.controller('QuestionsListController', function($rootScope, $
 	}
 
 	$scope.featuredQuestions = Questions.getFeaturedQuestions();
-
+	angular.element('#featuredCarousel').carousel({interval: 3000});
 	$scope.getPredicate = function(q) {
 		return $scope.predicate == 'date' ? q.date : Answers.getAnswersLengthByQuestionId(q.id);
 	};
@@ -35,12 +35,14 @@ QuestionControllers.controller('QuestionsListItemController', function($scope, A
 });
 
 // CREATE NEW QUESTION
-QuestionControllers.controller('AskQuestionController', function($scope, $filter, $location, Questions, Categories) {
+QuestionControllers.controller('AskQuestionController', function($scope, $filter, $location, Questions, Categories, Users) {
+
+
 	$scope.newQuestion = {
 		id: null,
 		title: null,
 		description: null,
-		userID: QAP.currentUserId,
+		userID: Users.getCurrentUser().id,
 		date: null,
 		categoryIDs: []
 	};

@@ -4,37 +4,43 @@ ServicesModule.factory('Users',function ($cookieStore) {
 	var data = [
 		{
 			id: 1,
+			username: 'hoa.nguyen',
 			name: 'Hòa',
 			joinDate:'2014-01-01T10:50:00+0700',
-			avatar: 'http://cozio.com/forum/Skins/Classic/Images/EmotIcons/Blink.gif',
+			avatar: 'http://en.gravatar.com/userimage/64610499/b11591d3d3ff1d572c3cb15f2722e234.jpg?size=200',
 			point: 754
 		},{
 			id: 2,
+			username: 'tuyet.le',
 			name: 'Tuyết',
 			joinDate:'2014-01-01T10:50:00+0700',
 			avatar: 'http://m.essentialbaby.com.au/forums/public/style_emoticons/default/biggrin.png',
 			point: 812
 		},{
 			id: 3,
+			username: 'tuyen.cao',
 			name: 'Tuyến',
 			joinDate:'2014-01-01T10:50:00+0700',
 			avatar: 'http://www.essentialbaby.com.au/forums/style_emoticons/default/glare.gif',
 			point: 813
 		},{
 			id: 4,
+			username: 'thao.duong',
 			name: 'Thảo',
 			joinDate:'2014-01-01T10:50:00+0700',
 			avatar: 'http://community.babycenter.com/js/tinymce_3_5_6/plugins/smileys/img/smiley-yell.gif',
 			point: 566
 		},{
 			id: 5,
+			username: 'long.nguyen',
 			name: 'Long',
 			joinDate:'2014-01-01T10:50:00+0700',
 			avatar: 'http://community.babycenter.com/js/tinymce_3_2_5/plugins/smileys/img/smiley-cool.gif',
 			point: 235
 		}
 	];
-	
+	var currentUser = null;
+
 	var Users = {
 		query: function () {
 			if ( $cookieStore.get(QAP.cookies.users) ) {
@@ -47,6 +53,22 @@ ServicesModule.factory('Users',function ($cookieStore) {
 		},
 		save: function () {
 			$cookieStore.put(QAP.cookies.users,data);
+		},
+		login: function(loginUser) {
+			//temp
+			var user = _.find(data, function(u) {
+				return u.username == loginUser.username && u.username == loginUser.password;
+			});
+
+			currentUser = user;
+			
+			return user; //undefined or user object
+		},
+		logout: function() {
+			currentUser = null;
+		},
+		getCurrentUser: function() {
+			return currentUser;
 		}
 	};
 	return Users;

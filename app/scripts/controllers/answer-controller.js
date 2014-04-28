@@ -8,15 +8,20 @@ AnswersControllers.controller('AnswerItemController', function ($scope, $filter,
 	$scope.answerUser = Users.getUserById($scope.answer.userID);
 	
 	$scope.rateAvai = function() {
-		return ($scope.answer.userID == QAP.currentUserId || $scope.answer.ratedBy.indexOf(QAP.currentUserId) > 0) ? 0 : 1;
+		var currentUser = Users.getCurrentUser();
+
+		if (currentUser)
+			return $scope.answer.userID != currentUser.id && $scope.answer.ratedBy.indexOf(currentUser.id) < 0;
+		return false;
 	} 
 
 	// LIKE OR DISLIKE ANSWER
 	$scope.rate = function (point) {
+
 		if ( $scope.rateAvai() ) {
-			Answers.rateAnswer($scope.questionId,$scope.answer.id,point,QAP.currentUserId);
+			var currentUserId = Users.getCurrentUser().id;
+			Answers.rateAnswer($scope.questionId,$scope.answer.id,point,currentUserId);
 			$scope.answerUser.point+=point;
-			$scope.rateAvai = 0;
 			Users.save();
 		}
 		return false;
@@ -26,6 +31,7 @@ AnswersControllers.controller('AnswerItemController', function ($scope, $filter,
 // ADD YOUR ANSWER
 AnswersControllers.controller('AddAnswerController', function($scope, $filter, Answers, Users, $routeParams) {
 
+
 	$scope.questionId = $routeParams.id;
 	$scope.newAnswerContent = null;
 	
@@ -33,7 +39,7 @@ AnswersControllers.controller('AddAnswerController', function($scope, $filter, A
 		$scope.newAnswer = {
 			'id': null,
 			'date': null,
-			'userID': QAP.currentUserId,
+			'userID': Users.getCurrentUser().id,
 			'content': null,
 			'point': 0,
 			'ratedBy': []
