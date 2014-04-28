@@ -1,4 +1,4 @@
-var QuestionControllers = angular.module('QAP.QuestionControllers', ['QAP.services','QAP.filters','ngCookies']);
+var QuestionControllers = angular.module('QAP.QuestionControllers', ['QAP.services','QAP.filters','ngCookies','QAP.directives']);
 
 // RENDER QUESTION LIST
 QuestionControllers.controller('QuestionsListController', function($rootScope, $scope, Questions, Categories, $routeParams, Answers) {

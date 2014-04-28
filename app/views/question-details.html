@@ -7,7 +7,7 @@
 			<h1 class="media-heading">{{ question.title }}</h1>
 			<blockquote><div class="detail">{{ question.description }}</div></blockquote>
 			<div class="tags"><a href="#/category/{{category.id}}" title="{{ category.name }}" class="label label-warning" data-ng-repeat="category in categories">{{ category.name }}</a></div>
-			<div class="date pull-right">asked  {{ question.date | smartDateTime }}</div>
+			<div class="date pull-right">asked <span smarttime="question"></span><!--{{ question.date | smartDateTime }}--></div>
 			<div class="author pull-left"><img src="{{questionOwner.avatar}}" alt="" width="20" height="20"><strong>{{ questionOwner.name }}</strong> <span>{{ questionOwner.point }}</span></div>
 		</div>
 	</div><!--/questionDetail-->
@@ -36,8 +36,8 @@
 			</div>
 			
 			<div class="media-body">
-				<div class="answer-content">{{ answer.content }}</div>
-				<div class="date pull-right">answered {{ answer.date | smartDateTime }}</div>
+				<div class="answer-content">{{ answer.content }}</div><!--{{ answer.date | smartDateTime }}-->
+				<div class="date pull-right">answered <span smarttime="answer"></span></div>
 				<div class="author pull-left"><img src="{{answerUser.avatar}}" alt="" width="20" height="20"><strong>{{ answerUser.name }}</strong> &middot; <span>{{ answerUser.point }}</span></div>
 			</div>
 			

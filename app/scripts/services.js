@@ -248,21 +248,21 @@ ServicesModule.factory('Answers', function($cookieStore) {
 				'userID': 2,
 				'content': 'Đi tắm đi!',
 				'point': 2,
-				'ratedBy': [2,3]
+				'ratedBy': [3]
 			},{
 				'id': 3,
 				'date':'2014-04-24T10:50:00+0700',
 				'userID': 3,
 				'content': 'Cởi đồ ra!',
 				'point': 0,
-				'ratedBy': [2,3]
+				'ratedBy': [2,4]
 			},{
 				'id': 4,
 				'date':'2014-04-24T10:50:00+0700',
 				'userID': 4,
 				'content': 'Mở máy quạt!',
 				'point': 4,
-				'ratedBy': [2,3,4,5]
+				'ratedBy': [2,3,5]
 			},{
 				'id': 5,
 				'date':'2014-04-22T10:50:00+0700',

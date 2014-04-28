@@ -36,11 +36,11 @@ filters.filter('smartDateTime', function($filter) {
 				
 				if ( objMinutes == curMinutes ) {
 				
-					return 'just seconds ago';
+					return 'a few seconds ago';
 				
 				}
 				
-				return 'just minutes ago';
+				return 'a few minutes ago';
 			}
 			
 			return 'today ' + objTime;

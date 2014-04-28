@@ -60,7 +60,7 @@
 				
 				<div class="btn-group btn-block" data-ng-controller="UsersController">
 				  <button type="button" class="btn btn-block btn-default dropdown-toggle" data-toggle="dropdown">
-					{{currentUser.name}} <span class="caret"></span>
+					<img src="{{currentUser.avatar}}" alt="" width="20" height="20"> {{currentUser.name}} <span class="caret"></span>
 				  </button>
 				  <ul class="dropdown-menu" role="menu">
 					<li data-ng-repeat="user in users"><a href="javascript:void(0)" data-ng-click="login(user.id)"><img src="{{user.avatar}}" alt="" width="20" height="20"> {{user.name}}</a></li>
