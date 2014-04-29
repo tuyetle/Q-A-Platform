@@ -1,4 +1,4 @@
-var QAP = angular.module('QAP', ['QuestionControllers']);
+var QAP = angular.module('QAP', ['ngRoute', 'QAP.QuestionControllers', 'QAP.AnswersControllers','ngCookies']);
 
 function QAPRouteConfig($routeProvider) {
 	$routeProvider
@@ -24,24 +24,74 @@ function QAPRouteConfig($routeProvider) {
 }
 
 QAP.config(QAPRouteConfig);
+QAP.currentUserId = 5;
+QAP.cookies = {
+	'answers': 'answers',
+	'users': 'users',
+	'questions': 'questions',
+	'categories': 'categories'
+};
 
-QAP.controller('MainController', function ($scope, $location) {
+QAP.controller('MainController', function ($scope, $location, $cookieStore, Questions, Answers, Users, Categories) {
 	$scope.askQuestionPath = '#/ask-question';
 	$scope.$location = $location;
 	$scope.locationPath = $location.path();
+	
+	// CLEAR ALL COOKIES
+	$scope.clearCookies = function () {
+		for(var cookie in QAP.cookies) {
+			$cookieStore.remove(cookie);
+		}
+	};
+	
+	// LOAD COOKIES
+	Questions.query();
+	Answers.query();
+	Users.query();
+	Categories.query();
 });
 
-QAP.controller('CategoriesListController', function ($scope, Categories) {
+QAP.controller('CategoriesListController', function ($scope, Categories, $rootScope) {
     // Category
     $scope.categoryList = Categories.query();
 
-   	$scope.selectedCategory = '-1';
+
+   	$rootScope.selectedCategory = '-1';
 
    	$scope.selectCategory = function(id) {
-   		$scope.selectedCategory = id;
+   		$rootScope.selectedCategory = id;
    	}
- });
+});
 
-QAP.controller('CategoryListItemController', function ($scope, Questions) {
-	$scope.questionLength = Questions.getQuestionLengthByCategory($scope.category.id);
+QAP.controller('UserController', function ($scope, Users, $rootScope) {
+	$scope.currentUser = null;
+
+	$scope.logined = function() {
+		$scope.currentUser = Users.getCurrentUser()
+		return $scope.currentUser == undefined ? false : true;
+	} 
+	$scope.logout = function() {
+		Users.logout();
+	}
+});
+
+QAP.controller('LoginController', function($scope, Users, $rootScope) {
+
+	$scope.loginSuccessfull = false;
+	$scope.loginClicked = false;
+	$scope.loginUser = null;
+
+	$scope.login = function() {
+		if ($scope.loginForm.$valid) {
+			$scope.loginClicked = true;
+			var user = Users.login($scope.loginUser);
+			if (user) {			
+				$scope.loginSuccessfull = true;
+				angular.element('#modal-login').modal('hide');
+			} else {
+				$scope.loginSuccessfull = false;
+			}
+		}
+	}
+
 });
