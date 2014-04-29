@@ -35,38 +35,46 @@ QuestionControllers.controller('QuestionsListItemController', function($scope, A
 });
 
 // CREATE NEW QUESTION
-QuestionControllers.controller('AskQuestionController', function($scope, $filter, $location, $rootScope, Questions, Categories, Users) {
-
-
-	$scope.newQuestion = {
-		id: null,
-		title: null,
-		description: null,
-		userID: $rootScope.rootCurrentUser.id,
-		date: null,
-		categoryIDs: []
-	};
+QuestionControllers.controller('AskQuestionController', function($rootScope, $scope, $filter, $location, $rootScope, Questions, Categories, Users) {
 	
-	$scope.selectedCategories = [];
-	$scope.categoryList = Categories.query();
+	if ( $rootScope.rootCurrentUser ) {
+		
+		$scope.newQuestion = {
+			id: null,
+			title: null,
+			description: null,
+			userID: $rootScope.rootCurrentUser.id,
+			date: null,
+			categoryIDs: []
+		};
+		
+		$scope.selectedCategories = [];
+		$scope.categoryList = Categories.query();
 
-	$scope.selectCategory = function(item) {
-		var idx = $scope.selectedCategories.indexOf(item);
-		if (idx > -1) {
-			$scope.selectedCategories.splice(idx, 1);
-	  	} else {
-			$scope.selectedCategories.push(item);
-	    }
-	};
+		$scope.selectCategory = function(item) {
+			var idx = $scope.selectedCategories.indexOf(item);
+			if (idx > -1) {
+				$scope.selectedCategories.splice(idx, 1);
+			} else {
+				$scope.selectedCategories.push(item);
+			}
+		};
+		
+		$scope.askQuestion = function () {
+			$scope.newQuestion.categoryIDs = $scope.selectedCategories;
+			var currentDate = $filter('date')(new Date(), 'yyyy-MM-ddThh:mm:ssZ');
+			$scope.newQuestion.date = currentDate;
+			Questions.askQuestion($scope.newQuestion);
+			Categories.change($scope.newQuestion.categoryIDs);
+			$location.path("#/");
+		};
+		
+	} else {
+		
+		$rootScope.$broadcast('loginRequest', []);
 	
-	$scope.askQuestion = function () {
-		$scope.newQuestion.categoryIDs = $scope.selectedCategories;
-		var currentDate = $filter('date')(new Date(), 'yyyy-MM-ddThh:mm:ssZ');
-		$scope.newQuestion.date = currentDate;
-		Questions.askQuestion($scope.newQuestion);
-		Categories.change($scope.newQuestion.categoryIDs);
-		$location.path("#/");
-	};
+	}
+	
 });
 
 // QUESTION DETAIL
