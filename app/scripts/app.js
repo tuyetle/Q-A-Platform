@@ -66,12 +66,13 @@ QAP.controller('UserController', function ($scope, Users, $rootScope) {
 	$scope.currentUser = null;
 
 	$scope.logined = function() {
-		$scope.currentUser = Users.getCurrentUser()
+		$scope.currentUser = Users.getCurrentUser();
 		return $scope.currentUser == undefined ? false : true;
 	};
 	
 	$scope.logout = function() {
 		Users.logout();
+		$rootScope.$broadcast('logout', []);
 	};
 });
 
@@ -88,6 +89,7 @@ QAP.controller('LoginController', function($scope, Users, $rootScope) {
 			if (user) {			
 				$scope.loginSuccessfull = true;
 				angular.element('#modal-login').modal('hide');
+				$rootScope.$broadcast('login', []);
 			} else {
 				$scope.loginSuccessfull = false;
 			}

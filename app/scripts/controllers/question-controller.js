@@ -35,10 +35,20 @@ QuestionControllers.controller('QuestionsListItemController', function($scope, A
 });
 
 // CREATE NEW QUESTION
-QuestionControllers.controller('AskQuestionController', function($rootScope, $scope, $filter, $location, $rootScope, Questions, Categories, Users) {
+QuestionControllers.controller('AskQuestionController', function($scope, $filter, $location, $rootScope, Questions, Categories, Users) {
 	
-	if ( $rootScope.rootCurrentUser ) {
-		
+	$scope.logined = Users.getCurrentUser();
+	
+	$scope.askQuestion = function () {
+		$scope.newQuestion.categoryIDs = $scope.selectedCategories;
+		var currentDate = $filter('date')(new Date(), 'yyyy-MM-ddThh:mm:ssZ');
+		$scope.newQuestion.date = currentDate;
+		Questions.askQuestion($scope.newQuestion);
+		Categories.change($scope.newQuestion.categoryIDs);
+		$location.path("#/");
+	};
+	
+	$scope.renderAskQuestionView = function () {
 		$scope.newQuestion = {
 			id: null,
 			title: null,
@@ -59,21 +69,27 @@ QuestionControllers.controller('AskQuestionController', function($rootScope, $sc
 				$scope.selectedCategories.push(item);
 			}
 		};
+	};
 		
-		$scope.askQuestion = function () {
-			$scope.newQuestion.categoryIDs = $scope.selectedCategories;
-			var currentDate = $filter('date')(new Date(), 'yyyy-MM-ddThh:mm:ssZ');
-			$scope.newQuestion.date = currentDate;
-			Questions.askQuestion($scope.newQuestion);
-			Categories.change($scope.newQuestion.categoryIDs);
-			$location.path("#/");
-		};
+	if ( $scope.logined ) {
+		
+		$scope.renderAskQuestionView();
 		
 	} else {
 		
 		$rootScope.$broadcast('loginRequest', []);
 	
 	}
+	
+	$scope.$on('logout', function(event, mass) {
+		$scope.logined = null;
+		$location.path("#/");
+	});
+	
+	$scope.$on('login', function(event, mass) {
+		$scope.renderAskQuestionView();
+		$scope.logined = Users.getCurrentUser();
+	});
 	
 });
 
