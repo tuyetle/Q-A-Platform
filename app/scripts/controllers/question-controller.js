@@ -36,28 +36,8 @@ QuestionControllers.controller('QuestionsListItemController', function($scope, A
 
 // CREATE NEW QUESTION
 QuestionControllers.controller('AskQuestionController', function($scope, $filter, $location, $rootScope, Questions, Categories, Users) {
-
-
-	$scope.newQuestion = {
-		id: null,
-		title: null,
-		description: null,
-		userID: $rootScope.rootCurrentUser.id,
-		date: null,
-		categoryIDs: []
-	};
 	
-	$scope.selectedCategories = [];
-	$scope.categoryList = Categories.query();
-
-	$scope.selectCategory = function(item) {
-		var idx = $scope.selectedCategories.indexOf(item);
-		if (idx > -1) {
-			$scope.selectedCategories.splice(idx, 1);
-	  	} else {
-			$scope.selectedCategories.push(item);
-	    }
-	};
+	$scope.logined = Users.getCurrentUser();
 	
 	$scope.askQuestion = function () {
 		$scope.newQuestion.categoryIDs = $scope.selectedCategories;
@@ -67,6 +47,50 @@ QuestionControllers.controller('AskQuestionController', function($scope, $filter
 		Categories.change($scope.newQuestion.categoryIDs);
 		$location.path("#/");
 	};
+	
+	$scope.renderAskQuestionView = function () {
+		$scope.newQuestion = {
+			id: null,
+			title: null,
+			description: null,
+			userID: $rootScope.rootCurrentUser.id,
+			date: null,
+			categoryIDs: []
+		};
+		
+		$scope.selectedCategories = [];
+		$scope.categoryList = Categories.query();
+
+		$scope.selectCategory = function(item) {
+			var idx = $scope.selectedCategories.indexOf(item);
+			if (idx > -1) {
+				$scope.selectedCategories.splice(idx, 1);
+			} else {
+				$scope.selectedCategories.push(item);
+			}
+		};
+	};
+		
+	if ( $scope.logined ) {
+		
+		$scope.renderAskQuestionView();
+		
+	} else {
+		
+		$rootScope.$broadcast('loginRequest', []);
+	
+	}
+	
+	$scope.$on('logout', function(event, mass) {
+		$scope.logined = null;
+		$location.path("#/");
+	});
+	
+	$scope.$on('login', function(event, mass) {
+		$scope.renderAskQuestionView();
+		$scope.logined = Users.getCurrentUser();
+	});
+	
 });
 
 // QUESTION DETAIL
