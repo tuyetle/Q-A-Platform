@@ -1,4 +1,4 @@
-var QAP = angular.module('QAP', ['QAP.QuestionControllers','ngCookies']);
+var QAP = angular.module('QAP', ['ngRoute', 'QAP.QuestionControllers', 'QAP.AnswersControllers','ngCookies']);
 
 function QAPRouteConfig($routeProvider) {
 	$routeProvider
@@ -51,24 +51,47 @@ QAP.controller('MainController', function ($scope, $location, $cookieStore, Ques
 	Categories.query();
 });
 
-QAP.controller('CategoriesListController', function ($scope, Categories) {
+QAP.controller('CategoriesListController', function ($scope, Categories, $rootScope) {
     // Category
     $scope.categoryList = Categories.query();
 
-   	$scope.selectedCategory = '-1';
+
+   	$rootScope.selectedCategory = '-1';
 
    	$scope.selectCategory = function(id) {
-   		$scope.selectedCategory = id;
+   		$rootScope.selectedCategory = id;
    	}
 });
 
-QAP.controller('UsersController', function ($scope, Users) {
-    $scope.users = Users.query();
-	$scope.currentUser = Users.getUserById(QAP.currentUserId);
-	
-	$scope.login = function (id) {
-		$scope.currentUser = Users.getUserById(id);
-		QAP.currentUserId = $scope.currentUser.id;
-		return false;
-	};
+QAP.controller('UserController', function ($scope, Users, $rootScope) {
+	$scope.currentUser = null;
+
+	$scope.logined = function() {
+		$scope.currentUser = Users.getCurrentUser()
+		return $scope.currentUser == undefined ? false : true;
+	} 
+	$scope.logout = function() {
+		Users.logout();
+	}
+});
+
+QAP.controller('LoginController', function($scope, Users, $rootScope) {
+
+	$scope.loginSuccessfull = false;
+	$scope.loginClicked = false;
+	$scope.loginUser = null;
+
+	$scope.login = function() {
+		if ($scope.loginForm.$valid) {
+			$scope.loginClicked = true;
+			var user = Users.login($scope.loginUser);
+			if (user) {			
+				$scope.loginSuccessfull = true;
+				angular.element('#modal-login').modal('hide');
+			} else {
+				$scope.loginSuccessfull = false;
+			}
+		}
+	}
+
 });
