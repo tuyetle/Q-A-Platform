@@ -25,3 +25,26 @@ Directives.directive('smarttime', [ '$timeout', '$filter', function ($timeout, $
         updateLater();
 	};
 }]);
+
+Directives.directive('myBackToTop', function() {
+    function link(scope, element, attrs) {
+    	element.on('click', function() {
+		    if(navigator.appName!='Opera'){
+		    	$('html, body').animate({ scrollTop: 0 }, 1000)}
+	 		else{$('html').animate({ scrollTop: 0 }, 1000)}
+	    });
+    }
+    return {
+      link: link
+    };
+});
+window.onscroll = function (event) {
+	var heightWindow = $(window).height();
+	
+	if($(this).scrollTop()>=heightWindow){
+      	$('.btn-back-to-top').css('display','inline-block')
+    }
+	else{
+		$('.btn-back-to-top').css('display','none')
+	}
+}
