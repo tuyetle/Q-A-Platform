@@ -1,6 +1,6 @@
 var ServicesModule = angular.module('QAP.services', ['ngCookies']);
 
-ServicesModule.factory('Users',function ($cookieStore) {
+ServicesModule.factory('Users',function ($cookieStore, $rootScope) {
 	var data = [
 		{
 			id: 1,
@@ -61,7 +61,8 @@ ServicesModule.factory('Users',function ($cookieStore) {
 			});
 
 			currentUser = user;
-			
+			$rootScope.rootCurrentUser = user;
+
 			return user; //undefined or user object
 		},
 		logout: function() {

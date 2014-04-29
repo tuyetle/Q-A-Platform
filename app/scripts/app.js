@@ -84,7 +84,7 @@ QAP.controller('LoginController', function($scope, Users, $rootScope) {
 	$scope.login = function() {
 		if ($scope.loginForm.$valid) {
 			$scope.loginClicked = true;
-			var user =Users.login($scope.loginUser);
+			var user = Users.login($scope.loginUser);
 			if (user) {			
 				$scope.loginSuccessfull = true;
 				angular.element('#modal-login').modal('hide');

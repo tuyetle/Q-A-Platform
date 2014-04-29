@@ -1,14 +1,14 @@
 var AnswersControllers = angular.module('QAP.AnswersControllers', ['QAP.services','QAP.filters','ngCookies']);
 
 // ANSWER OF QUESTION DETAIL
-AnswersControllers.controller('AnswerItemController', function ($scope, $filter, Answers, Users, $routeParams) {
+AnswersControllers.controller('AnswerItemController', function ($rootScope, $scope, $filter, Answers, Users, $routeParams) {
 
 	$scope.questionId = $routeParams.id;
 	$scope.answer = Answers.getAnswerById($scope.questionId, $scope.answer.id);
 	$scope.answerUser = Users.getUserById($scope.answer.userID);
 	
 	$scope.rateAvai = function() {
-		var currentUser = Users.getCurrentUser();
+		var currentUser = $rootScope.rootCurrentUser;
 
 		if (currentUser)
 			return $scope.answer.userID != currentUser.id && $scope.answer.ratedBy.indexOf(currentUser.id) < 0;
@@ -19,7 +19,7 @@ AnswersControllers.controller('AnswerItemController', function ($scope, $filter,
 	$scope.rate = function (point) {
 
 		if ( $scope.rateAvai() ) {
-			var currentUserId = Users.getCurrentUser().id;
+			var currentUserId = $rootScope.rootCurrentUser.id;
 			Answers.rateAnswer($scope.questionId,$scope.answer.id,point,currentUserId);
 			$scope.answerUser.point+=point;
 			Users.save();
@@ -29,7 +29,7 @@ AnswersControllers.controller('AnswerItemController', function ($scope, $filter,
 });
 
 // ADD YOUR ANSWER
-AnswersControllers.controller('AddAnswerController', function($scope, $filter, Answers, Users, $routeParams) {
+AnswersControllers.controller('AddAnswerController', function($rootScope, $scope, $filter, Answers, Users, $routeParams) {
 
 
 	$scope.questionId = $routeParams.id;
@@ -39,7 +39,7 @@ AnswersControllers.controller('AddAnswerController', function($scope, $filter, A
 		$scope.newAnswer = {
 			'id': null,
 			'date': null,
-			'userID': Users.getCurrentUser().id,
+			'userID': $rootScope.rootCurrentUser.id,
 			'content': null,
 			'point': 0,
 			'ratedBy': []

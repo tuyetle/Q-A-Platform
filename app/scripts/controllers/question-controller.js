@@ -35,14 +35,14 @@ QuestionControllers.controller('QuestionsListItemController', function($scope, A
 });
 
 // CREATE NEW QUESTION
-QuestionControllers.controller('AskQuestionController', function($scope, $filter, $location, Questions, Categories, Users) {
+QuestionControllers.controller('AskQuestionController', function($scope, $filter, $location, $rootScope, Questions, Categories, Users) {
 
 
 	$scope.newQuestion = {
 		id: null,
 		title: null,
 		description: null,
-		userID: Users.getCurrentUser().id,
+		userID: $rootScope.rootCurrentUser.id,
 		date: null,
 		categoryIDs: []
 	};
