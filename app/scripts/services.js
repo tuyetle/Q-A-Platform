@@ -76,7 +76,7 @@ ServicesModule.factory('Users',function ($cookieStore, $rootScope) {
 			return user; //undefined or user object
 		},
 		logout: function() {
-			currentUser = null;
+			$rootScope.rootCurrentUser = currentUser = null;
 			this.rememberLoggedin();
 		},
 		getCurrentUser: function() {
