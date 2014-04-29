@@ -1,45 +1,52 @@
 var ServicesModule = angular.module('QAP.services', ['ngCookies']);
 
-ServicesModule.factory('Users',function ($cookieStore) {
+ServicesModule.factory('Users',function ($cookieStore, $rootScope) {
 	var data = [
 		{
 			id: 1,
+			username: 'hoa.nguyen',
 			name: 'Hòa',
 			joinDate:'2014-01-01T10:50:00+0700',
-			avatar: 'http://cozio.com/forum/Skins/Classic/Images/EmotIcons/Blink.gif',
+			avatar: 'http://en.gravatar.com/userimage/64610499/b11591d3d3ff1d572c3cb15f2722e234.jpg?size=200',
 			point: 754
 		},{
 			id: 2,
+			username: 'tuyet.le',
 			name: 'Tuyết',
 			joinDate:'2014-01-01T10:50:00+0700',
 			avatar: 'http://m.essentialbaby.com.au/forums/public/style_emoticons/default/biggrin.png',
 			point: 812
 		},{
 			id: 3,
+			username: 'tuyen.cao',
 			name: 'Tuyến',
 			joinDate:'2014-01-01T10:50:00+0700',
 			avatar: 'http://www.essentialbaby.com.au/forums/style_emoticons/default/glare.gif',
 			point: 813
 		},{
 			id: 4,
+			username: 'thao.duong',
 			name: 'Thảo',
 			joinDate:'2014-01-01T10:50:00+0700',
 			avatar: 'http://community.babycenter.com/js/tinymce_3_5_6/plugins/smileys/img/smiley-yell.gif',
 			point: 566
 		},{
 			id: 5,
+			username: 'long.nguyen',
 			name: 'Long',
 			joinDate:'2014-01-01T10:50:00+0700',
 			avatar: 'http://community.babycenter.com/js/tinymce_3_2_5/plugins/smileys/img/smiley-cool.gif',
 			point: 235
 		}
 	];
-	
+	var currentUser = null;
+
 	var Users = {
 		query: function () {
 			if ( $cookieStore.get(QAP.cookies.users) ) {
 				data = $cookieStore.get(QAP.cookies.users);
 			}
+			
 			return data;
 		},
 		getUserById: function (id) {
@@ -47,6 +54,36 @@ ServicesModule.factory('Users',function ($cookieStore) {
 		},
 		save: function () {
 			$cookieStore.put(QAP.cookies.users,data);
+		},
+		loadCurrentUser: function () {
+			if ( $cookieStore.get(QAP.cookies.currentUser) ) {
+				currentUser = $cookieStore.get(QAP.cookies.currentUser);
+				$rootScope.rootCurrentUser = currentUser;
+				return currentUser;
+			} else {
+				return null;
+			}
+		},
+		login: function(loginUser) {
+			//temp
+			var user = _.find(data, function(u) {
+				return u.username == loginUser.username && u.username == loginUser.password;
+			});
+
+			currentUser = user;
+			$rootScope.rootCurrentUser = user;
+			this.rememberLoggedin();
+			return user; //undefined or user object
+		},
+		logout: function() {
+			currentUser = null;
+			this.rememberLoggedin();
+		},
+		getCurrentUser: function() {
+			return currentUser;
+		},
+		rememberLoggedin: function() {
+			$cookieStore.put(QAP.cookies.currentUser,currentUser);
 		}
 	};
 	return Users;
@@ -59,7 +96,7 @@ ServicesModule.factory('Questions',function($cookieStore) {
 		description: "Trời nóng quá là nóng phải làm sao đây?",
 		userID: 1,
 		featured: true,
-		date: '2014-04-20T10:50:00+0700',
+		date: '2014-04-21T10:50:00+0700',
 		categoryIDs: [1,2]
 	}, {
 		id: 2,
@@ -67,7 +104,7 @@ ServicesModule.factory('Questions',function($cookieStore) {
 		description: 'Why why why why ?',
 		userID: 2,
 		featured: true,
-		date: '2014-04-20T10:50:00+0700',
+		date: '2014-02-20T10:50:00+0700',
 		categoryIDs: [1,10]
 	}, {
 		id: 3,
@@ -75,7 +112,7 @@ ServicesModule.factory('Questions',function($cookieStore) {
 		description: 'I want to draw good enough that I can make a living from it and Im starting my drawing training today although I have been drawing(hundreds of drawings) since last year but not as serious as Im about to get now as I need to be good enough to make a living at it. Im curious as to what you think about this. Im a young adult by the way.',
 		userID: 3,
 		featured: false,
-		date: '2014-04-20T10:50:00+0700',
+		date: '2014-03-20T10:50:00+0700',
 		categoryIDs: [1]
 	}, {
 		id: 4,
@@ -83,7 +120,7 @@ ServicesModule.factory('Questions',function($cookieStore) {
 		description: 'Almost all others country are already available, but Germany and Austria still not. I dont understand why...:-(',
 		userID: 4,
 		featured: true,
-		date: '2014-04-20T10:50:00+0700',
+		date: '2014-07-20T10:50:00+0700',
 		categoryIDs: [5]
 	}, {
 		id: 5,
@@ -91,7 +128,7 @@ ServicesModule.factory('Questions',function($cookieStore) {
 		description: 'Is it still available anywhere? or is it gone forever because I accidentally deleted...',
 		userID: 5,
 		featured: false,
-		date: '2014-04-20T10:50:00+0700',
+		date: '2014-01-29T10:50:00+0700',
 		categoryIDs: [5]
 	}, {
 		id: 6,
@@ -99,7 +136,7 @@ ServicesModule.factory('Questions',function($cookieStore) {
 		description: 'I accedently sitched off my pc directly through ups! after that my pc recoverd automatically! after that i cant see any text under folders and icons in desktop! my start menu dosent open,...',
 		userID: 1,
 		featured: false,
-		date: '2014-04-20T10:50:00+0700',
+		date: '2013-12-12T12:50:00+0700',
 		categoryIDs: [5,10]
 	}, {
 		id: 7,
@@ -133,6 +170,14 @@ ServicesModule.factory('Questions',function($cookieStore) {
 		featured: true,
 		date: '2014-04-20T10:50:00+0700',
 		categoryIDs: [5,10,9]
+	}, {
+		id: 20,
+		title: 'Test',
+		description: 'I have read all of The Walking Dead comics online so far. But I want to start getting a copy and reading them.',
+		userID: 5,
+		featured: true,
+		date: '2012-04-20T10:50:00+0700',
+		categoryIDs: [9]
 	}];
 	
 	var Questions = {
@@ -332,6 +377,60 @@ ServicesModule.factory('Answers', function($cookieStore) {
 				'ratedBy': []
 			},{
 				'id': 15,
+				'date':'2014-04-22T10:50:00+0700',
+				'userID': 5,
+				'content': 'Tui không biết!',
+				'point': -6,
+				'ratedBy': []
+			}
+		],
+		20: [
+			{
+				'id': 100,
+				'date':'2014-04-22T10:50:00+0700',
+				'userID': 1,
+				'content': 'Tui không biết!',
+				'point': 10,
+				'ratedBy': []
+			},{
+				'id': 101,
+				'date':'2014-04-22T10:50:00+0700',
+				'userID': 2,
+				'content': 'Tui không biết!',
+				'point': 10,
+				'ratedBy': []
+			},{
+				'id': 102,
+				'date':'2014-04-22T10:50:00+0700',
+				'userID': 3,
+				'content': 'Tui không biết!',
+				'point': 8,
+				'ratedBy': []
+			},{
+				'id': 103,
+				'date':'2014-04-22T10:50:00+0700',
+				'userID': 4,
+				'content': 'Tui không biết!',
+				'point': 5,
+				'ratedBy': []
+			},{
+				'id': 104,
+				'date':'2014-04-22T10:50:00+0700',
+				'userID': 5,
+				'content': 'Tui không biết!',
+				'point': -6,
+				'ratedBy': []
+			},
+			{
+				'id': 105,
+				'date':'2014-04-22T10:50:00+0700',
+				'userID': 5,
+				'content': 'Tui không biết!',
+				'point': -6,
+				'ratedBy': []
+			},
+			{
+				'id': 106,
 				'date':'2014-04-22T10:50:00+0700',
 				'userID': 5,
 				'content': 'Tui không biết!',

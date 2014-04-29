@@ -1,53 +1,48 @@
-var QuestionControllers = angular.module('QAP.QuestionControllers', ['QAP.services','QAP.filters','ngCookies','QAP.directives']);
+var QuestionControllers = angular.module('QAP.QuestionControllers', ['QAP.services','QAP.filters','ngCookies','QAP.directives', 'ngRoute']);
 
 // RENDER QUESTION LIST
-QuestionControllers.controller('QuestionsListController', function($scope, Questions, Categories, $routeParams) {
+QuestionControllers.controller('QuestionsListController', function($rootScope, $scope, Questions, Categories, $routeParams, Answers) {
 	$scope.showCarousel = true;
-
-	$scope.sortOption = {
-		predicate: 'date',
-		reverse: true
-	};
+	$scope.predicate = 'date';
 
 	if($routeParams.id) {
 		$scope.questions = Questions.queryByCategory($routeParams.id);
 		$scope.showCarousel = false;
 	} else {
+		$rootScope.selectedCategory = '-1';
 		$scope.questions = Questions.query();
 	}
 
 	$scope.featuredQuestions = Questions.getFeaturedQuestions();
-
+	angular.element('#featuredCarousel').carousel({interval: 3000});
+	$scope.getPredicate = function(q) {
+		return $scope.predicate == 'date' ? q.date : Answers.getAnswersLengthByQuestionId(q.id);
+	};
 	$scope.changePredicate = function(newPredicate) {
-		switch(newPredicate) {
-			case 'popular':
-				$scope.sortOption.predicate = "anwsers";
-				$scope.sortOption.reverse = true;
-				break;
-			default:
-				$scope.sortOption.predicate = "date";
-				$scope.sortOption.reverse = true;
-				break;
-		}
-	}
+		$scope.predicate = newPredicate;
+	};
 });
 
 // HANDLE QUESTION ITEM IN LIST
-QuestionControllers.controller('QuestionsListItemController', function($scope, Answers, Users, Categories) {
+QuestionControllers.controller('QuestionsListItemController', function($scope, Answers, Users, Categories, $rootScope) {
 	$scope.answersLength = Answers.getAnswersLengthByQuestionId($scope.question.id);
 	$scope.statusLabelClass = $scope.answersLength > 0 ? 'label-success':'label-default';
 	$scope.categories = Categories.getCategoriesByIDs($scope.question.categoryIDs);
-	
 	$scope.askedUser = Users.getUserById($scope.question.userID);
+	$scope.changeCategory = function (id) {
+		$rootScope.selectedCategory = id;
+	}
 });
 
 // CREATE NEW QUESTION
-QuestionControllers.controller('AskQuestionController', function($scope, $filter, $location, Questions, Categories) {
+QuestionControllers.controller('AskQuestionController', function($scope, $filter, $location, $rootScope, Questions, Categories, Users) {
+
+
 	$scope.newQuestion = {
 		id: null,
 		title: null,
 		description: null,
-		userID: QAP.currentUserId,
+		userID: $rootScope.rootCurrentUser.id,
 		date: null,
 		categoryIDs: []
 	};
@@ -79,62 +74,8 @@ QuestionControllers.controller('QuestionDetailsController', function($scope, $fi
 	$scope.questionId = $routeParams.id;
 	$scope.question = Questions.getQuestionDetail($scope.questionId);
 	$scope.questionOwner = Users.getUserById($scope.question.userID);
-	
 	$scope.categories = Categories.getCategoriesByIDs($scope.question.categoryIDs);
-	
 	$scope.answersForThis = Answers.getAnswersByQuestionId($scope.questionId);
 
 });
 
-// ANSWER OF QUESTION DETAIL
-QuestionControllers.controller('AnswerItemController', function ($scope, $filter, Answers, Users, $routeParams) {
-
-	$scope.questionId = $routeParams.id;
-	$scope.answer = Answers.getAnswerById($scope.questionId, $scope.answer.id);
-	$scope.answerUser = Users.getUserById($scope.answer.userID);
-	
-	$scope.rateAvai = function() {
-		return ($scope.answer.userID == QAP.currentUserId || $scope.answer.ratedBy.indexOf(QAP.currentUserId) > 0) ? 0 : 1;
-	} 
-
-	// LIKE OR DISLIKE ANSWER
-	$scope.rate = function (point) {
-		if ( $scope.rateAvai ) {
-			Answers.rateAnswer($scope.questionId,$scope.answer.id,point,QAP.currentUserId);
-			$scope.answerUser.point+=point;
-			$scope.rateAvai = 0;
-			Users.save();
-		}
-		return false;
-	};
-});
-
-// ADD YOUR ANSWER
-QuestionControllers.controller('AddAnswerController', function($scope, $filter, Answers, Users, $routeParams) {
-
-	$scope.questionId = $routeParams.id;
-	$scope.newAnswerContent = null;
-	
-	$scope.addAnswer = function () {
-		$scope.newAnswer = {
-			'id': null,
-			'date': null,
-			'userID': QAP.currentUserId,
-			'content': null,
-			'point': 0,
-			'ratedBy': []
-		};
-		var currentDate = $filter('date')(new Date(), 'yyyy-MM-ddThh:mm:ssZ');
-		$scope.newAnswer.date = currentDate;
-		$scope.newAnswer.content = $scope.newAnswerContent;
-		$scope.newAnswerContent = '';
-		Answers.insertAnswer($scope.questionId, $scope.newAnswer);
-		return false;
-	};
-	
-	$scope.resetAnswer = function () {
-		$scope.newAnswerContent = '';
-		return false;
-	};
-
-});
